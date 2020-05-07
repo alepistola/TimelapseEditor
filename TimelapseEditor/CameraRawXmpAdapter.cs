@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TimelapseEditor
 {
-    class CameraRawXmpAdapter : IPhotoChanges
+    class CameraRawXmpAdapter : IPhotoChanges, IAdapterProxy
     {
 
         private XmpFile _xmpFile;
@@ -32,10 +32,10 @@ namespace TimelapseEditor
             else
             {
                 Double.TryParse(sub.Substring(1), out value);
-                value *= (-1);
+                value *= (-1.00);
             }
 
-            return value;
+            return value / 100.00;
 
         }
 
@@ -49,5 +49,20 @@ namespace TimelapseEditor
         public string GetImagePath() => _photoFilename;
 
         public string GetFilePath() => _xmpFile.GetPath();
+
+        public void SetExposure(double value)
+        {
+            SetExposureToFile(value);
+        }
+
+        public double GetExposure()
+        {
+            return GetExposureFromFile();
+        }
+
+        public void ApplyPreset()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

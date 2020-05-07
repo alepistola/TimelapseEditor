@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 
@@ -14,7 +15,6 @@ namespace TimelapseEditor
     {
         private string _path;
         private StreamReader _sr;
-        private StreamWriter _sw;
 
         public XmpFile(string filename)
         {
@@ -47,11 +47,33 @@ namespace TimelapseEditor
                     if(row.StartsWith("crs:" + key))
                         toRet = row.Split(':')[1].Split('=')[1];
                 }
+                _sr.Close();
             }
             else
                 throw new InvalidConstraintException("[-] The specified key is not valid");
 
             return toRet;
+        }
+
+        public void SaveTag(string key, string value)
+        {
+            string row;
+
+            if(!String.IsNullOrEmpty(key) && !String.IsNullOrEmpty(value))
+            {
+                string[] lines = File.ReadAllLines(_path);
+                List<string> newlines = new List<string>();
+                foreach (string line in lines)
+                {
+                    newlines.Add(line);
+                    row = line.Trim();
+                    if (row.StartsWith("crs:Version"))
+                    {
+                        newlines.Add($"crs:{key}=\"{value}\"");
+                    }
+                }
+                File.WriteAllLines(_path, newlines.ToArray());
+            }
         }
 
 

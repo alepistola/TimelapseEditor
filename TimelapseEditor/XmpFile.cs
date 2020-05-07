@@ -8,13 +8,14 @@ namespace TimelapseEditor
     /* 
      * This class is responsable for the reading and writing directly to and from the file
      * Any form of caching is provided at this level
-     * For more informations about xmp file and the photoshop crs tag please refer to https://exiftool.org/TagNames/XMP.html#crs
+     * For more informations about xmp file and the camera raw (photoshop) crs tag please refer to https://exiftool.org/TagNames/XMP.html#crs
      */
 
     class XmpFile
     {
         private string _path;
         private StreamReader _sr;
+        private const string _afterKey = "xmp:CreatorTool";
 
         public XmpFile(string filename)
         {
@@ -33,9 +34,9 @@ namespace TimelapseEditor
 
         public string GetPath() => _path;
 
-        public object ReadTag(string key)
+        public string ReadTag(string key)
         {
-            object toRet = null;
+            string toRet = null;
             string row;
 
             if (!String.IsNullOrEmpty(key))
@@ -44,8 +45,8 @@ namespace TimelapseEditor
                 while (!_sr.EndOfStream && toRet == null)
                 {
                     row = _sr.ReadLine().Trim();
-                    if(row.StartsWith("crs:" + key))
-                        toRet = row.Split(':')[1].Split('=')[1];
+                    if(row.StartsWith(key))
+                        toRet = row.Split('=')[1];
                 }
                 _sr.Close();
             }
@@ -67,9 +68,9 @@ namespace TimelapseEditor
                 {
                     newlines.Add(line);
                     row = line.Trim();
-                    if (row.StartsWith("crs:Version"))
+                    if (row.StartsWith(_afterKey))
                     {
-                        newlines.Add($"crs:{key}=\"{value}\"");
+                        newlines.Add($"\t\t{key}=\"{value}\"");
                     }
                 }
                 File.WriteAllLines(_path, newlines.ToArray());

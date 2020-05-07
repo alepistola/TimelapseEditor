@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "3kiv22UdRItKYZ6kE90aaRvMqBqzWEn7Il2hipprGTGfHoW0Ay8OYD4dpDMFj3cYygmGYFOrulTNys2WZOc4lw==",
+  "dgSpecHash": "VqXgGQuL9AGZk/VyEJqZm7oUbRgxYF76K5YVMoBpc3PyaWeF69CThfkEkiAotgo91j6zEnosWS1DNWqn2+gs8g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor\\TimelapseEditor.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Alessandro\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512"
+  ],
   "logs": []
 }

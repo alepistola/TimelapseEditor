@@ -18,10 +18,17 @@ namespace TimelapseEditor
             Console.WriteLine($"[!] Retrieved Contrast2012 from {file.GetPath()}, value:{contrast}");
             */
 
-            /* Camera raw adapter */
+            /* Camera raw adapter test 
             CameraRawXmpAdapter adapter = new CameraRawXmpAdapter(imagePath);
             exposure = adapter.GetExposureFromFile();
             Console.WriteLine($"[!] Retrieved Exposure2012 from {adapter.GetFilePath()}, value:{exposure}");
+            */
+
+            /* AdapterProxy test */
+            AdapterProxy adapterProxy = new AdapterProxy(imagePath);
+            exposure = adapterProxy.GetExposure();
+            Console.WriteLine($"[!] Retrieved Exposure2012 from {adapterProxy.GetImagePath()}, value:{exposure}");
+
 
         }
     }

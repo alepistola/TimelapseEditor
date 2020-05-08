@@ -69,5 +69,17 @@ namespace TimelapseEditor
         {
             throw new NotImplementedException();
         }
+
+        public Dictionary<string, double> GetExifFromPhoto()
+        {
+            return _xmpFile.ReadExifFromPhoto();
+        }
+
+        public Dictionary<string, double> GetExif()
+        {
+            return GetExifFromPhoto();
+        }
+
+
     }
 }

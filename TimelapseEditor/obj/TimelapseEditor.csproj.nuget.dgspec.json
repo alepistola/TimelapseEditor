@@ -41,6 +41,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "MetadataExtractor": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
             "System.Collections": {
               "target": "Package",
               "version": "[4.3.0, )"

@@ -1,13 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "VqXgGQuL9AGZk/VyEJqZm7oUbRgxYF76K5YVMoBpc3PyaWeF69CThfkEkiAotgo91j6zEnosWS1DNWqn2+gs8g==",
+  "dgSpecHash": "cHxiCyTMqU0RMWZPxSuSc2LhONVi93+SKMnq4TBA2nLHNEjOqDHrPyCqa+ZkebEcbMovUWqfC8v+7f8s+VRuBA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor\\TimelapseEditor.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Alessandro\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Alessandro\\.nuget\\packages\\metadataextractor\\2.4.0\\metadataextractor.2.4.0.nupkg.sha512",
+    "C:\\Users\\Alessandro\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\Alessandro\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
+    "C:\\Users\\Alessandro\\.nuget\\packages\\system.text.encoding.codepages\\4.5.1\\system.text.encoding.codepages.4.5.1.nupkg.sha512",
+    "C:\\Users\\Alessandro\\.nuget\\packages\\xmpcore\\6.1.10\\xmpcore.6.1.10.nupkg.sha512"
   ],
   "logs": []
 }

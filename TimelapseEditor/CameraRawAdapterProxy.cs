@@ -9,12 +9,14 @@ namespace TimelapseEditor
     {
         private IPhotoChanges _adapter;
         private double _exposure;
+        private Dictionary<string, double> _exif;
         private readonly string _photoFilename;
 
         public CameraRawAdapterProxy(string filename)
         {
             _photoFilename = filename;
             _exposure = Double.NaN;
+            _exif = null;
         }
 
         private IPhotoChanges GetAdapter()
@@ -55,5 +57,12 @@ namespace TimelapseEditor
         }
 
         public string GetImagePath() => _photoFilename;
+
+        public Dictionary<string, double> GetExif()
+        {
+            if (_exif == null)
+                _exif = GetAdapter().GetExifFromPhoto();
+            return _exif;
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace TimelapseEditor
         public void ApplyPresetToFile(Preset preset);
         public string GetImagePath();
         public string GetFilePath();
+        public string GetImageFileName();
         public Dictionary<string, double> GetExifFromPhoto();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace TimelapseEditor
@@ -22,27 +23,31 @@ namespace TimelapseEditor
             throw new NotImplementedException();
         }
 
-        public double GetExposureFromFile()
+        public double? GetExposureFromFile()
         {
-            double value;
-            string read = _xmpFile.ReadTag(_translationRules["Exposure"]);
-            string sub = read.Substring(1).Split("\"")[0];
-            if (sub.StartsWith("+"))
-                Double.TryParse(sub.Substring(1), out value);
-            else
+            double value = double.NaN;
+            try
             {
-                Double.TryParse(sub.Substring(1), out value);
-                value *= (-1.00);
+                string read = _xmpFile.ReadTag(_translationRules["Exposure"]);
+                string sub = read.Substring(1).Split("\"")[0];
+                if (sub.StartsWith("+"))
+                    Double.TryParse(sub.Substring(1).Replace('.', ','), out value);
+                else
+                {
+                    Double.TryParse(sub.Substring(1).Replace('.', ','), out value);
+                    value *= (-1.00);
+                }
             }
+            catch (Exception e)
+                { Console.WriteLine(e.Message); }
 
-            return value / 100.00;
-
+            return value;
         }
 
         public void SetExposureToFile(double value)
         {
-            string toWrite = (value >= 0) ? "+" + value.ToString() : "-" + value.ToString();
-            toWrite = $"\"{toWrite}\"";
+            string stringValue = string.Format("{0:N2}", value);
+            string toWrite = (value >= 0) ? "+" + stringValue.Replace(',', '.') : "-" + stringValue.Replace(',', '.');
             _xmpFile.SaveTag(_translationRules["Exposure"], toWrite);
         }
 
@@ -57,7 +62,7 @@ namespace TimelapseEditor
 
         public double GetExposure()
         {
-            return GetExposureFromFile();
+            return GetExposureFromFile().GetValueOrDefault();
         }
 
         public void ApplyPreset()

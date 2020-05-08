@@ -10,6 +10,7 @@ namespace TimelapseEditor
         public double GetExposure();
         public void ApplyPreset();
         public string GetImagePath();
+        public string GetImageFileName();
         public Dictionary<string, double> GetExif();
     }
 }

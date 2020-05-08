@@ -1,7 +1,10 @@
-﻿using System;
+﻿using MetadataExtractor;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using MetadataExtractor.Formats.Exif;
+using System.Linq;
 
 namespace TimelapseEditor
 {
@@ -16,6 +19,7 @@ namespace TimelapseEditor
         private string _path;
         private StreamReader _sr;
         private const string _afterKey = "xmp:CreatorTool";
+        private Dictionary<string, double> _exif;
 
         public XmpFile(string photoPath)
         {
@@ -24,20 +28,24 @@ namespace TimelapseEditor
             {
                 throw new FileNotFoundException($"[-] Image {photoPath} not found");
             }
+
             // calculate the path for the xmp file
             _path = photoPath.Split('.')[0] + ".xmp";
 
+            // read exif
+            ReadExif(photoPath);
+
             // checking if the xmp file already exists otherwise i'll create it
-            if(!File.Exists(_path))
+            if (!File.Exists(_path))
             {
                 File.Create(_path).Close();
                 CreateXmpTemplate(photoPath);
             }
-                
-
         }
 
         public string GetPath() => _path;
+
+        public Dictionary<string, double> ReadExifFromPhoto() => _exif;
 
         public string ReadTag(string key)
         {
@@ -142,6 +150,18 @@ namespace TimelapseEditor
             };
 
             File.WriteAllLines(_path, lines);
+        }
+
+        private void ReadExif(string photoPath) 
+        {
+            _exif = new Dictionary<string, double>() { { "ExposureTime", Double.NaN }, { "Iso", Double.NaN }, { "F-number", Double.NaN } };
+
+            IEnumerable<MetadataExtractor.Directory> directories = ImageMetadataReader.ReadMetadata(photoPath);
+
+            var subIfdDirectory = directories.OfType<ExifSubIfdDirectory>().Where(s => s.ContainsTag(ExifDirectoryBase.TagFNumber)).FirstOrDefault();
+            _exif["Iso"] = int.Parse(subIfdDirectory?.GetDescription(ExifDirectoryBase.TagIsoEquivalent));
+            _exif["ExposureTime"] = double.Parse(subIfdDirectory?.GetDescription(ExifDirectoryBase.TagExposureTime).Split(' ')[0]);
+            _exif["F-number"] = double.Parse(subIfdDirectory?.GetDescription(ExifDirectoryBase.TagFNumber).Substring(2));
         }
     }
 }

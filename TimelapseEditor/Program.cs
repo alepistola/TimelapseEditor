@@ -1,4 +1,8 @@
-﻿using System;
+﻿using MetadataExtractor;
+using MetadataExtractor.Formats.Exif;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TimelapseEditor
 {
@@ -7,6 +11,7 @@ namespace TimelapseEditor
         static void Main(string[] args)
         {
             double exposure;
+            Dictionary<string, double> exif;
             string imagePath = "C:\\Users\\Alessandro\\Pictures\\viaggio Erasmus - 5 - D\\DSC_0004.NEF";
 
             /* XmpFile test
@@ -27,13 +32,12 @@ namespace TimelapseEditor
             /* AdapterProxy test */
             CameraRawAdapterProxy adapterProxy = new CameraRawAdapterProxy(imagePath);
             exposure = adapterProxy.GetExposure();
-            Console.WriteLine($"[!] Retrieved Exposure2012 from {adapterProxy.GetImagePath()}, value:{exposure}");
             adapterProxy.SetExposure(1.20);
             adapterProxy.SaveExposure();
-            exposure = adapterProxy.GetExposure();
-            Console.WriteLine($"[!] Retrieved Exposure2012 from {adapterProxy.GetImagePath()}, value:{exposure}");
-
-
+            exif = adapterProxy.GetExif();
+            Console.WriteLine($"[!] Exif data for {adapterProxy.GetImagePath()}");
+            foreach(System.Collections.Generic.KeyValuePair<string, double> k in exif)
+                Console.WriteLine($"  {k.Key} : {k.Value}");
         }
     }
 }

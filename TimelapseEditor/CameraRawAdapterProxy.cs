@@ -10,19 +10,21 @@ namespace TimelapseEditor
         private IPhotoChanges _adapter;
         private double _exposure;
         private Dictionary<string, double> _exif;
-        private readonly string _photoFilename;
+        private readonly string _photoPath;
+        private string _imageFileName;
 
-        public CameraRawAdapterProxy(string filename)
+        public CameraRawAdapterProxy(string photoPath)
         {
-            _photoFilename = filename;
+            _photoPath = photoPath;
             _exposure = Double.NaN;
             _exif = null;
+            _imageFileName = null;
         }
 
         private IPhotoChanges GetAdapter()
         {
             if (_adapter == null)
-                _adapter = new CameraRawXmpAdapter(_photoFilename);
+                _adapter = new CameraRawXmpAdapter(_photoPath);
             return _adapter;
         }
 
@@ -56,7 +58,14 @@ namespace TimelapseEditor
                 throw new InvalidOperationException("Exposure value not set hence the adapter is not yet instantiated");
         }
 
-        public string GetImagePath() => _photoFilename;
+        public string GetImagePath() => _photoPath;
+
+        public string GetImageFileName()
+        {
+            if (String.IsNullOrEmpty(_imageFileName))
+                _imageFileName = GetAdapter().GetImageFileName();
+            return _imageFileName;
+        }
 
         public Dictionary<string, double> GetExif()
         {

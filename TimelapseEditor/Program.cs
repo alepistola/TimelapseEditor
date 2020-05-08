@@ -7,7 +7,7 @@ namespace TimelapseEditor
         static void Main(string[] args)
         {
             double exposure;
-            string imagePath = "C:\\Users\\Alessandro\\Pictures\\viaggio Erasmus - 5 - D\\DSC_0003.NEF";
+            string imagePath = "C:\\Users\\Alessandro\\Pictures\\viaggio Erasmus - 5 - D\\DSC_0004.NEF";
 
             /* XmpFile test
             XmpFile file = new XmpFile(imagePath);
@@ -26,6 +26,10 @@ namespace TimelapseEditor
 
             /* AdapterProxy test */
             CameraRawAdapterProxy adapterProxy = new CameraRawAdapterProxy(imagePath);
+            exposure = adapterProxy.GetExposure();
+            Console.WriteLine($"[!] Retrieved Exposure2012 from {adapterProxy.GetImagePath()}, value:{exposure}");
+            adapterProxy.SetExposure(1.20);
+            adapterProxy.SaveExposure();
             exposure = adapterProxy.GetExposure();
             Console.WriteLine($"[!] Retrieved Exposure2012 from {adapterProxy.GetImagePath()}, value:{exposure}");
 

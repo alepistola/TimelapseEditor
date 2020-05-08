@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Text;
 
 namespace TimelapseEditor
@@ -54,6 +55,8 @@ namespace TimelapseEditor
         public string GetImagePath() => _photoFilename;
 
         public string GetFilePath() => _xmpFile.GetPath();
+
+        public string GetImageFileName() => _xmpFile.GetImageFileName();
 
         public void SetExposure(double value)
         {

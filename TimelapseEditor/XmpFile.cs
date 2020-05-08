@@ -16,7 +16,7 @@ namespace TimelapseEditor
 
     class XmpFile
     {
-        private string _path;
+        private string _filePath, _imageFileName;
         private StreamReader _sr;
         private const string _afterKey = "xmp:CreatorTool";
         private Dictionary<string, double> _exif;
@@ -30,20 +30,25 @@ namespace TimelapseEditor
             }
 
             // calculate the path for the xmp file
-            _path = photoPath.Split('.')[0] + ".xmp";
+            _filePath = photoPath.Split('.')[0] + ".xmp";
+
+            // retrieve the image name
+            int position = photoPath.Split('\\').Length - 1;
+            _imageFileName = photoPath.Split('\\')[position];
 
             // read exif
             ReadExif(photoPath);
 
             // checking if the xmp file already exists otherwise i'll create it
-            if (!File.Exists(_path))
+            if (!File.Exists(_filePath))
             {
-                File.Create(_path).Close();
+                File.Create(_filePath).Close();
                 CreateXmpTemplate(photoPath);
             }
         }
 
-        public string GetPath() => _path;
+        public string GetPath() => _filePath;
+        public string GetImageFileName() => _imageFileName;
 
         public Dictionary<string, double> ReadExifFromPhoto() => _exif;
 
@@ -54,7 +59,7 @@ namespace TimelapseEditor
 
             if (!String.IsNullOrEmpty(key))
             {
-                _sr = File.OpenText(_path);
+                _sr = File.OpenText(_filePath);
                 while (!_sr.EndOfStream && toRet == null)
                 {
                     row = _sr.ReadLine().Trim();
@@ -64,10 +69,10 @@ namespace TimelapseEditor
                 _sr.Close();
             }
             else
-                throw new ArgumentNullException($"[-] File: {_path} the specified key: {key} is not valid");
+                throw new ArgumentNullException($"[-] File: {_filePath} the specified key: {key} is not valid");
 
             if (toRet != null) return toRet;
-            throw new InvalidConstraintException($"[-] File: {_path} does not contain key: {key}");
+            throw new InvalidConstraintException($"[-] File: {_filePath} does not contain key: {key}");
         }
 
         public void SaveTag(string key, string value)
@@ -84,9 +89,9 @@ namespace TimelapseEditor
             }
             else
             {
-                throw new ArgumentNullException($"[-] File: {_path} the value passed for key {key} is invalid");
+                throw new ArgumentNullException($"[-] File: {_filePath} the value passed for key {key} is invalid");
             }
-            string[] lines = File.ReadAllLines(_path);
+            string[] lines = File.ReadAllLines(_filePath);
             List<string> newlines = new List<string>();
             foreach (string line in lines)
             {
@@ -97,7 +102,7 @@ namespace TimelapseEditor
                     newlines.Add($"\t\t{key}=\"{value}\"");
                 }
             }
-            File.WriteAllLines(_path, newlines.ToArray());
+            File.WriteAllLines(_filePath, newlines.ToArray());
         }
 
         // if the tag exists is gonna be removed
@@ -107,7 +112,7 @@ namespace TimelapseEditor
 
             if (!String.IsNullOrEmpty(key))
             {
-                string[] lines = File.ReadAllLines(_path);
+                string[] lines = File.ReadAllLines(_filePath);
                 List<string> newlines = new List<string>();
                 foreach (string line in lines)
                 {
@@ -117,17 +122,14 @@ namespace TimelapseEditor
                         newlines.Add(line);
                     }
                 }
-                File.WriteAllLines(_path, newlines.ToArray());
+                File.WriteAllLines(_filePath, newlines.ToArray());
             }
             else
-                throw new ArgumentNullException($"[-] File: {_path} the specified key: {key} is not valid");
+                throw new ArgumentNullException($"[-] File: {_filePath} the specified key: {key} is not valid");
         }
 
         private void CreateXmpTemplate(string photoPath)
         {
-            int position = photoPath.Split('\\').Length - 1;
-            string rawFileName = photoPath.Split('\\')[position];
-
             string[] lines = new string[]
             {
                 "<x:xmpmeta xmlns:x=\"adobe:ns: meta / \" x:xmptk=\"Adobe XMP Core 5.6 - c128 79.159124, 2016 / 03 / 18 - 14:01:55        \">	",
@@ -143,13 +145,13 @@ namespace TimelapseEditor
                 "\t\txmlns:dc = \"http://purl.org/dc/elements/1.1/\"",
                 "\t\txmlns:crs = \"http://ns.adobe.com/camera-raw-settings/1.0/\"",
                 "\t\txmp:CreatorTool = \"Ver.1.01\"",
-                "\t\tcrs:RawFileName = \"" + rawFileName + "\" >",
+                "\t\tcrs:RawFileName = \"" + _imageFileName + "\" >",
                 "\t</rdf:Description >",
                 "  </ rdf:RDF >",
                 "</ x:xmpmeta >"
             };
 
-            File.WriteAllLines(_path, lines);
+            File.WriteAllLines(_filePath, lines);
         }
 
         private void ReadExif(string photoPath) 

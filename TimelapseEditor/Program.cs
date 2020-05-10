@@ -14,7 +14,7 @@ namespace TimelapseEditor
             //double exposure;
             //Dictionary<string, double> exif;
             string firstImagePath = "C:\\Users\\Alessandro\\Pictures\\viaggio Erasmus - 5 - D\\DSC_0004.NEF";
-            List<CameraRawAdapterProxy> images;
+            //List<CameraRawAdapterProxy> images;
 
             /* XmpFile test
             XmpFile file = new XmpFile(imagePath);
@@ -43,55 +43,13 @@ namespace TimelapseEditor
             Console.WriteLine($"[!] Filename of image: {adapterProxy.GetImageFileName()}");
             */
 
+            /* Timelapse test */
             Console.WriteLine("Please enter the full filepath of the first image");
             firstImagePath = Console.ReadLine();
-            images = GetAllImages(firstImagePath);
+            Timelapse.Instance(firstImagePath);
+            
 
 
-        }
-
-        private static string GetNextImagePath(string path)
-        {
-            int position = path.Split('\\').Length - 1;
-            string imageFileName = path.Split('\\')[position];
-            string pathWithoutImageFileName = path.Substring(0, (path.Length - imageFileName.Length));
-            string imageName = imageFileName.Split('.')[0];
-            string imageNumber = "";
-            string nameBeforeSequenceNumber = "";
-            int nextImageNumber;
-            string nextImagePath;
-            string zeros = "";
-
-            for(int i = 0; i < imageName.Length; i++)
-            {
-                char actualChar = imageName.ElementAt(i);
-                if (Char.IsDigit(actualChar) && actualChar == '0' && imageNumber == "")
-                    zeros += actualChar;
-                else if (Char.IsDigit(actualChar))
-                    imageNumber += actualChar;
-                else
-                    nameBeforeSequenceNumber += actualChar;
-            }
-            nextImageNumber = int.Parse(imageNumber) + 1;
-            nextImagePath = pathWithoutImageFileName + nameBeforeSequenceNumber + zeros + nextImageNumber.ToString() + '.' + imageFileName.Split('.')[1];
-            return nextImagePath;
-        }
-
-        // Consider creating LoadSequenceFromFirstPhoto as static method of Timelapse class
-        private static List<CameraRawAdapterProxy> GetAllImages(string firstImagePath)
-        {
-            int found = 0;
-            List<CameraRawAdapterProxy> imgs = new List<CameraRawAdapterProxy>();
-            while (File.Exists(firstImagePath))
-            {
-                CameraRawAdapterProxy adapterProxy = new CameraRawAdapterProxy(firstImagePath);
-                Console.WriteLine($"[+] Found: {adapterProxy.GetImagePath()}");
-                imgs.Add(adapterProxy);
-                firstImagePath = GetNextImagePath(firstImagePath);
-                found++;
-            }
-            Console.WriteLine($"[!] Total {found} image to process");
-            return imgs;
-        }
+        }        
     }
 }

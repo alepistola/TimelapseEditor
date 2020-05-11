@@ -8,6 +8,7 @@ namespace TimelapseEditor
     {
         public void SetExposure(double value);
         public double GetExposure();
+        public void SaveExposure();
         public void ApplyPreset();
         public string GetImagePath();
         public string GetImageFileName();

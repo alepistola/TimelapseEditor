@@ -7,7 +7,7 @@ namespace TimelapseEditor
 {
     class CameraRawAdapterProxy : IAdapterProxy
     {
-        private IPhotoChanges _adapter;
+        private CameraRawXmpAdapter _adapter;
         private double _exposure;
         private Dictionary<string, double> _exif;
         private readonly string _photoPath;
@@ -21,7 +21,7 @@ namespace TimelapseEditor
             _imageFileName = null;
         }
 
-        private IPhotoChanges GetAdapter()
+        private CameraRawXmpAdapter GetAdapter() // da cambiare in iphotocanges quando avrai ristrutturato la gerarchia
         {
             if (_adapter == null)
                 _adapter = new CameraRawXmpAdapter(_photoPath);
@@ -36,7 +36,7 @@ namespace TimelapseEditor
         public double GetExposure()
         {
             if (Double.IsNaN(_exposure))
-                _exposure = GetAdapter().GetExposureFromFile().GetValueOrDefault();
+                _exposure = GetAdapter().GetExposure();
             return _exposure;
         }
 

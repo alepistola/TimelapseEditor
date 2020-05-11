@@ -99,7 +99,7 @@ namespace TimelapseEditor
                 row = line.Trim();
                 if (row.StartsWith(_afterKey))
                 {
-                    newlines.Add($"\t\t{key}=\"{value}\"");
+                    newlines.Add($"   {key}=\"{value}\"");
                 }
             }
             File.WriteAllLines(_filePath, newlines.ToArray());
@@ -132,23 +132,23 @@ namespace TimelapseEditor
         {
             string[] lines = new string[]
             {
-                "<x:xmpmeta xmlns:x=\"adobe:ns: meta / \" x:xmptk=\"Adobe XMP Core 5.6 - c128 79.159124, 2016 / 03 / 18 - 14:01:55        \">	",
-                "  < rdf:RDF xmlns:rdf = \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" >",
-                "\t< rdf:Description rdf:about = \"\"",
-                "\t\txmlns:xmp = \"http://ns.adobe.com/xap/1.0/\"",
-                "\t\txmlns:tiff = \"http://ns.adobe.com/tiff/1.0/\"",
-                "\t\txmlns:exif = \"http://ns.adobe.com/exif/1.0/\"",
-                "\t\txmlns:aux = \"http://ns.adobe.com/exif/1.0/aux/\"",
-                "\t\txmlns:photoshop = \"http://ns.adobe.com/photoshop/1.0/\"",
-                "\t\txmlns:xmpMM = \"http://ns.adobe.com/xap/1.0/mm/\"",
-                "\t\txmlns:stEvt = \"http://ns.adobe.com/xap/1.0/sType/ResourceEvent#\"",
-                "\t\txmlns:dc = \"http://purl.org/dc/elements/1.1/\"",
-                "\t\txmlns:crs = \"http://ns.adobe.com/camera-raw-settings/1.0/\"",
-                "\t\txmp:CreatorTool = \"Ver.1.01\"",
-                "\t\tcrs:RawFileName = \"" + _imageFileName + "\" >",
-                "\t</rdf:Description >",
-                "  </ rdf:RDF >",
-                "</ x:xmpmeta >"
+                "<x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 5.6-c128 79.159124, 2016/03/18-14:01:55        \">	",
+                " <rdf:RDF xmlns:rdf = \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" >",
+                "  <rdf:Description rdf:about=\"\"",
+                "   xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\"",
+                "   xmlns:tiff=\"http://ns.adobe.com/tiff/1.0/\"",
+                "   xmlns:exif=\"http://ns.adobe.com/exif/1.0/\"",
+                "   xmlns:aux=\"http://ns.adobe.com/exif/1.0/aux/\"",
+                "   xmlns:photoshop=\"http://ns.adobe.com/photoshop/1.0/\"",
+                "   xmlns:xmpMM=\"http://ns.adobe.com/xap/1.0/mm/\"",
+                "   xmlns:stEvt=\"http://ns.adobe.com/xap/1.0/sType/ResourceEvent#\"",
+                "   xmlns:dc=\"http://purl.org/dc/elements/1.1/\"",
+                "   xmlns:crs=\"http://ns.adobe.com/camera-raw-settings/1.0/\"",
+                "   xmp:CreatorTool=\"Ver.1.01\"",
+                "   crs:RawFileName=\"" + _imageFileName + "\" >",
+                "  </rdf:Description >",
+                " </rdf:RDF>",
+                "</x:xmpmeta>"
             };
 
             File.WriteAllLines(_filePath, lines);
@@ -162,7 +162,10 @@ namespace TimelapseEditor
 
             var subIfdDirectory = directories.OfType<ExifSubIfdDirectory>().Where(s => s.ContainsTag(ExifDirectoryBase.TagFNumber)).FirstOrDefault();
             _exif["Iso"] = int.Parse(subIfdDirectory?.GetDescription(ExifDirectoryBase.TagIsoEquivalent));
-            _exif["ExposureTime"] = double.Parse(subIfdDirectory?.GetDescription(ExifDirectoryBase.TagExposureTime).Split(' ')[0]);
+            string expression = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagExposureTime).Split(' ')[0];
+            double num = Double.Parse(expression.Split('/')[0]);
+            double den = Double.Parse(expression.Split('/')[1]);
+            _exif["ExposureTime"] = (num / den);
             _exif["F-number"] = double.Parse(subIfdDirectory?.GetDescription(ExifDirectoryBase.TagFNumber).Substring(2));
         }
     }

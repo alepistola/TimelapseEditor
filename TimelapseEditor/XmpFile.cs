@@ -71,8 +71,7 @@ namespace TimelapseEditor
             else
                 throw new ArgumentNullException($"[-] File: {_filePath} the specified key: {key} is not valid");
 
-            if (toRet != null) return toRet;
-            throw new InvalidConstraintException($"[-] File: {_filePath} does not contain key: {key}");
+            return toRet;
         }
 
         public void SaveTag(string key, string value)

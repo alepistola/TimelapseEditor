@@ -30,7 +30,7 @@ namespace TimelapseEditor
         {
             double initialExposureTime = _modifiedImages[_startImageNum].GetExposure();
 
-            if(_startImageNum - _lastImageNum == 0)
+            /*if(_startImageNum - _lastImageNum == 0)
             {
                 IAdapterProxy current = _modifiedImages[_startImageNum];
 
@@ -40,8 +40,8 @@ namespace TimelapseEditor
                 current.SaveExposure();
             }
             else
-            {
-                for (int i = _startImageNum; i < _lastImageNum; i++)
+            {*/
+                for (int i = _startImageNum; i <= _lastImageNum; i++)
                 {
                     IAdapterProxy current = _modifiedImages[i];
 
@@ -50,7 +50,7 @@ namespace TimelapseEditor
                     current.SetExposure(newExposureTime);
                     current.SaveExposure();
                 }
-            }
+            //}
         }
     }
 }

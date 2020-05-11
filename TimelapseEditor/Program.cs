@@ -32,7 +32,7 @@ namespace TimelapseEditor
             */
 
             /* AdapterProxy test
-            CameraRawAdapterProxy adapterProxy = new CameraRawAdapterProxy(imagePath);
+            IAdapterProxy adapterProxy = new CameraRawAdapterProxy(firstImagePath);
             exposure = adapterProxy.GetExposure();
             adapterProxy.SetExposure(1.20);
             adapterProxy.SaveExposure();
@@ -44,12 +44,19 @@ namespace TimelapseEditor
             */
 
             /* Timelapse test */
+            //Console.WriteLine("Please enter the full filepath of the first image");
+            //firstImagePath = Console.ReadLine();
+            //Timelapse.Instance(firstImagePath);
+
+            //CameraRawAdapterProxy adapterProxy = new CameraRawAdapterProxy(firstImagePath);
+            //Console.WriteLine(adapterProxy.GetExif()["ExposureTime"]);
+
+            /* Analyze Exp test */
             Console.WriteLine("Please enter the full filepath of the first image");
             firstImagePath = Console.ReadLine();
-            Timelapse.Instance(firstImagePath);
-            
+            Timelapse.Instance(firstImagePath).AnalyzeExposure();
 
 
-        }        
+        }
     }
 }

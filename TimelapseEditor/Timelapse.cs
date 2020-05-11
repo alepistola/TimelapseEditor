@@ -65,6 +65,8 @@ namespace TimelapseEditor
                     nameBeforeSequenceNumber += actualChar;
             }
             nextImageNumber = int.Parse(imageNumber) + 1;
+            if (int.Parse(imageNumber) == 9 || int.Parse(imageNumber) == 99 || int.Parse(imageNumber) == 999)
+                zeros = zeros.Substring(1);
             nextImagePath = pathWithoutImageFileName + nameBeforeSequenceNumber + zeros + nextImageNumber.ToString() + '.' + imageFileName.Split('.')[1];
             return nextImagePath;
         }
@@ -100,7 +102,10 @@ namespace TimelapseEditor
                     if (exif1["ExposureTime"] != exif2["ExposureTime"])
                     {
                         // Use log and doubling function to calculate stops
-                        exposure += (-1) * Math.Log2(exif1["ExposureTime"] / exif2["ExposureTime"]);
+                        if (exif1["ExposureTime"] < exif2["ExposureTime"])
+                            exposure +=  Math.Log2(exif1["ExposureTime"] / exif2["ExposureTime"]);
+                        else
+                            exposure += (-1) * Math.Log2(exif1["ExposureTime"] / exif2["ExposureTime"]);
                     }
 
                     // If the aperture was changed

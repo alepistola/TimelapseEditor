@@ -30,13 +30,16 @@ namespace TimelapseEditor
             try
             {
                 string read = _xmpFile.ReadTag(_translationRules["Exposure"]);
-                string sub = read.Substring(1).Split("\"")[0];
-                if (sub.StartsWith("+"))
-                    Double.TryParse(sub.Substring(1).Replace('.', ','), out value);
-                else
+                if(!string.IsNullOrEmpty(read))
                 {
-                    Double.TryParse(sub.Substring(1).Replace('.', ','), out value);
-                    value *= (-1.00);
+                    string sub = read.Substring(1).Split("\"")[0];
+                    if (sub.StartsWith("+"))
+                        Double.TryParse(sub.Substring(1).Replace('.', ','), out value);
+                    else
+                    {
+                        Double.TryParse(sub.Substring(1).Replace('.', ','), out value);
+                        value *= (-1.00);
+                    }
                 }
             }
             catch (Exception e)

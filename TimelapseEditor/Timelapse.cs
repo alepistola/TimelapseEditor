@@ -9,11 +9,13 @@ namespace TimelapseEditor
     class Timelapse
     {
         private static Timelapse _instance = null;
-        private List<CameraRawAdapterProxy> _images;
+        private List<IAdapterProxy> _images;
+        private List<ExposureChange> _exposureChanges;
 
         private Timelapse(string photoPath)
         {
             _images = LoadImagesFromFirstPhoto(photoPath);
+            _exposureChanges = new List<ExposureChange>();
         }
 
         public static Timelapse Instance(string photoPath)
@@ -24,13 +26,13 @@ namespace TimelapseEditor
         }
 
          
-        private List<CameraRawAdapterProxy> LoadImagesFromFirstPhoto(string photoPath)
+        private List<IAdapterProxy> LoadImagesFromFirstPhoto(string photoPath)
         {
             int found = 0;
-            List<CameraRawAdapterProxy> imgs = new List<CameraRawAdapterProxy>();
+            List<IAdapterProxy> imgs = new List<IAdapterProxy>();
             while (File.Exists(photoPath))
             {
-                CameraRawAdapterProxy adapterProxy = new CameraRawAdapterProxy(photoPath);
+                IAdapterProxy adapterProxy = new CameraRawAdapterProxy(photoPath);
                 Console.WriteLine($"[+] Found: {adapterProxy.GetImagePath()}");
                 imgs.Add(adapterProxy);
                 photoPath = GetNextImagePath(photoPath);
@@ -65,6 +67,83 @@ namespace TimelapseEditor
             nextImageNumber = int.Parse(imageNumber) + 1;
             nextImagePath = pathWithoutImageFileName + nameBeforeSequenceNumber + zeros + nextImageNumber.ToString() + '.' + imageFileName.Split('.')[1];
             return nextImagePath;
+        }
+
+        /* Analyzes exposure, searching for changes and creating "exposureChanges"
+	     * lists, to store images data in change sequence. Then Calculate the
+	     * exposure offset required to match differences in images.	
+        */
+        public void AnalyzeExposure()
+        {
+            int startExpChange;
+
+            // foreach image in _images
+            for(int i = 0; i < _images.Count -1; i++)
+            {
+                IAdapterProxy curr = _images[i];
+                IAdapterProxy next = _images[i + 1];
+                
+                // Sets start image of exposure change
+                if (_exposureChanges.Count == 0)
+                    startExpChange = 0;
+                else
+                    startExpChange = _exposureChanges.Last().GetLastImageNum() + 1;
+
+                if (IsExposureChanged(curr, next))
+                {
+                    ExposureChange newChange = new ExposureChange(_images, startExpChange, i);
+                    double exposure = 0;
+                    Dictionary<string, double> exif1 = curr.GetExif();
+                    Dictionary<string, double> exif2 = next.GetExif();
+
+                    // If the shutter speed was changed
+                    if (exif1["ExposureTime"] != exif2["ExposureTime"])
+                    {
+                        // Use log and doubling function to calculate stops
+                        exposure += (-1) * Math.Log2(exif1["ExposureTime"] / exif2["ExposureTime"]);
+                    }
+
+                    // If the aperture was changed
+                    if (exif1["F-number"] != exif2["F-number"])
+                    {
+                        // Use log function to calculate stops
+                        exposure += (2) * Math.Log2(exif1["F-number"] / exif2["F-number"]);
+                    }
+
+                    // If iso was changed
+                    if (exif1["Iso"] != exif2["Iso"])
+                    {
+                        // Use log function to calculate stops
+                        exposure += (-1) * Math.Log2(exif1["Iso"] / exif2["Iso"]);
+                    }
+
+                    // If the "xmp" exposure setting is changed..
+                    if (curr.GetExposure() != next.GetExposure())
+                    {
+                        exposure += (next.GetExposure() - curr.GetExposure());
+                    }
+
+                    // Set calculated change to object
+                    newChange.SetExposureChange(exposure);
+                    //newChange.SaveChange();
+
+                    // Save exposure change to exposureChanges list!
+                    // Allowing multiple exposure changes to occur and be analyzed independently
+                    _exposureChanges.Add(newChange);
+                }
+            }
+            Console.WriteLine("[!] Finished analyzing the exposure time");
+            _exposureChanges.ForEach(expChange => expChange.SaveChange());
+            Console.WriteLine("[!] Finished saving the exposure changes to files");
+        }
+
+        private bool IsExposureChanged(IAdapterProxy img1, IAdapterProxy img2)
+        {
+            if((img1.GetExif()["ExposureTime"] != img2.GetExif()["ExposureTime"]) || (img1.GetExif()["Iso"] != img2.GetExif()["Iso"]) || (img1.GetExif()["F-number"] != img2.GetExif()["F-number"]))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

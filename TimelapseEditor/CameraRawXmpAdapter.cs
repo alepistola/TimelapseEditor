@@ -40,7 +40,9 @@ namespace TimelapseEditor
                 }
             }
             catch (Exception e)
-                { Console.WriteLine(e.Message); }
+            { 
+                Console.WriteLine(e.Message); 
+            }
 
             return value;
         }
@@ -48,7 +50,7 @@ namespace TimelapseEditor
         public void SetExposureToFile(double value)
         {
             string stringValue = string.Format("{0:N2}", value);
-            string toWrite = (value >= 0) ? "+" + stringValue.Replace(',', '.') : "-" + stringValue.Replace(',', '.');
+            string toWrite = (value >= 0) ? "+" + stringValue.Replace(',', '.') : stringValue.Replace(',', '.');
             _xmpFile.SaveTag(_translationRules["Exposure"], toWrite);
         }
 
@@ -65,7 +67,8 @@ namespace TimelapseEditor
 
         public double GetExposure()
         {
-            return GetExposureFromFile().GetValueOrDefault();
+            double? exp = GetExposureFromFile();
+            return Double.IsNaN(exp.Value) ? 0.00 : exp.Value;
         }
 
         public void ApplyPreset()
@@ -83,6 +86,9 @@ namespace TimelapseEditor
             return GetExifFromPhoto();
         }
 
+        public void SaveExposure()
+        {
 
+        }
     }
 }

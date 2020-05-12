@@ -1,0 +1,150 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor.UnitIntegrationTests\\TimelapseEditor.UnitIntegrationTests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor.UnitIntegrationTests\\TimelapseEditor.UnitIntegrationTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor.UnitIntegrationTests\\TimelapseEditor.UnitIntegrationTests.csproj",
+        "projectName": "TimelapseEditor.UnitIntegrationTests",
+        "projectPath": "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor.UnitIntegrationTests\\TimelapseEditor.UnitIntegrationTests.csproj",
+        "packagesPath": "C:\\Users\\Alessandro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor.UnitIntegrationTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Alessandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor\\TimelapseEditor.csproj": {
+                "projectPath": "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor\\TimelapseEditor.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.5.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor\\TimelapseEditor.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor\\TimelapseEditor.csproj",
+        "projectName": "TimelapseEditor",
+        "projectPath": "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor\\TimelapseEditor.csproj",
+        "packagesPath": "C:\\Users\\Alessandro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alessandro\\source\\repos\\TimelapseEditor\\TimelapseEditor\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Alessandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "MetadataExtractor": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "System.Collections": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -9,9 +9,10 @@ namespace TimelapseEditor
         public void SetExposure(double value);
         public double GetExposure();
         public void SaveExposure();
-        public void ApplyPreset();
+        public void ApplyPreset(Preset preset);
         public string GetImagePath();
         public string GetImageFileName();
         public Dictionary<string, double> GetExif();
+        public void ApplyVignette(int intensity);
     }
 }

@@ -11,37 +11,43 @@ namespace TimelapseEditor
     {
         static void Main(string[] args)
         {
-            //double exposure;
-            //Dictionary<string, double> exif;
-            string firstImagePath = "C:\\Users\\Alessandro\\Pictures\\viaggio Erasmus - 5 - D\\DSC_0004.NEF";
-            //List<CameraRawAdapterProxy> images;
+            string firstImagePath;
 
-            /* XmpFile test
-            XmpFile file = new XmpFile(imagePath);
-            exposure = file.ReadTag("crs:Exposure2012").ToString();
-            Console.WriteLine($"[!] Retrieved Exposure2012 from {file.GetPath()}, value:{exposure}");
-            file.SaveTag("crs:Contrast2012", "+1.00");
-            contrast = file.ReadTag("crs:Contrast2012").ToString();
-            Console.WriteLine($"[!] Retrieved Contrast2012 from {file.GetPath()}, value:{contrast}");
-            */
-
-            /* Camera raw adapter test 
-            CameraRawXmpAdapter adapter = new CameraRawXmpAdapter(imagePath);
-            exposure = adapter.GetExposureFromFile();
-            Console.WriteLine($"[!] Retrieved Exposure2012 from {adapter.GetFilePath()}, value:{exposure}");
-            */
-
-            /* AdapterProxy test
-            IAdapterProxy adapterProxy = new CameraRawAdapterProxy(firstImagePath);
-            exposure = adapterProxy.GetExposure();
-            adapterProxy.SetExposure(1.20);
-            adapterProxy.SaveExposure();
-            exif = adapterProxy.GetExif();
-            Console.WriteLine($"[!] Exif data for {adapterProxy.GetImagePath()}");
-            foreach(System.Collections.Generic.KeyValuePair<string, double> k in exif)
-                Console.WriteLine($"  {k.Key} : {k.Value}");
-            Console.WriteLine($"[!] Filename of image: {adapterProxy.GetImageFileName()}");
-            */
+            Welcome();
+            int option = int.Parse(Console.ReadLine());
+            if (option == 2)
+            {
+                Console.WriteLine("with what intensity value the vignette shall be? (1-5) ");
+                int intensity = int.Parse(Console.ReadLine());
+                if (intensity > 0 && intensity <= 5)
+                {
+                    Console.WriteLine("Please enter the full path of the first image");
+                    firstImagePath = Console.ReadLine();
+                    ITimelapseBuilder timelapseBuilder = new TimelapseBuilder(firstImagePath);
+                    Director director = new Director();
+                    director.SetBuilder(timelapseBuilder);
+                    director.BuildStabilizedWithVignetteTimelapse(intensity);
+                    Console.WriteLine("[+] Operation terminated correctly!");
+                }
+                else
+                {
+                    Console.WriteLine("[x] Err: value not valid!");
+                }
+            }
+            else if (option == 1)
+            {
+                Console.WriteLine("Please enter the full path of the first image");
+                firstImagePath = Console.ReadLine();
+                ITimelapseBuilder timelapseBuilder = new TimelapseBuilder(firstImagePath);
+                Director director = new Director();
+                director.SetBuilder(timelapseBuilder);
+                director.BuildStabilizedTimelapse();
+                Console.WriteLine("[+] Operation terminated correctly!");
+            }
+            else
+            {
+                Console.WriteLine("[x] Err: value not valid!");
+            }
 
             /* Timelapse test */
             //Console.WriteLine("Please enter the full filepath of the first image");
@@ -52,11 +58,21 @@ namespace TimelapseEditor
             //Console.WriteLine(adapterProxy.GetExif()["ExposureTime"]);
 
             /* Analyze Exp test */
-            Console.WriteLine("Please enter the full filepath of the first image");
-            firstImagePath = Console.ReadLine();
-            Timelapse.Instance(firstImagePath).AnalyzeExposure();
+            //Console.WriteLine("Please enter the full path of the first image");
+            //firstImagePath = Console.ReadLine();
+            //Timelapse.Instance(firstImagePath).AnalyzeExposure();
 
 
+        }
+
+        static void Welcome()
+        {
+            Console.WriteLine("-------------------- Timelapse RAW editor --------------------\n");
+            Console.WriteLine("This programme will let you choose the type of changes you may");
+            Console.WriteLine("want to apply at your raw footage timelapse. These are the options available:");
+            Console.WriteLine("1. Smoothly ramp the exposure throughout a timelapse");
+            Console.WriteLine("2. Option 1 + the addition of a vignette with intensity from 1 to 5\n");
+            Console.WriteLine("Please enter the number of the modification you want to apply: ");
         }
     }
 }

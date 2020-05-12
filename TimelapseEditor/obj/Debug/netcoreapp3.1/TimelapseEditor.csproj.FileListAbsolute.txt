@@ -1,0 +1,16 @@
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\TimelapseEditor.exe
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\TimelapseEditor.deps.json
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\TimelapseEditor.runtimeconfig.json
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\TimelapseEditor.runtimeconfig.dev.json
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\TimelapseEditor.dll
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\TimelapseEditor.pdb
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\obj\Debug\netcoreapp3.1\TimelapseEditor.csprojAssemblyReference.cache
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\obj\Debug\netcoreapp3.1\TimelapseEditor.AssemblyInfoInputs.cache
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\obj\Debug\netcoreapp3.1\TimelapseEditor.AssemblyInfo.cs
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\obj\Debug\netcoreapp3.1\TimelapseEditor.dll
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\obj\Debug\netcoreapp3.1\TimelapseEditor.pdb
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\obj\Debug\netcoreapp3.1\TimelapseEditor.genruntimeconfig.cache
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\obj\Debug\netcoreapp3.1\TimelapseEditor.csproj.CoreCompileInputs.cache
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\MetadataExtractor.dll
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\XmpCore.dll
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\obj\Debug\netcoreapp3.1\TimelapseEditor.csproj.CopyComplete

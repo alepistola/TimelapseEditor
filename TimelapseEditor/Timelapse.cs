@@ -6,11 +6,12 @@ using System.Text;
 
 namespace TimelapseEditor
 {
-    class Timelapse
+    public class Timelapse
     {
         private static Timelapse _instance = null;
         private List<IAdapterProxy> _images;
         private List<ExposureChange> _exposureChanges;
+        private VignetteChange _vignetteChange;
 
         private Timelapse(string photoPath)
         {
@@ -130,7 +131,6 @@ namespace TimelapseEditor
 
                     // Set calculated change to object
                     newChange.SetExposureChange(exposure);
-                    //newChange.SaveChange();
 
                     // Save exposure change to exposureChanges list!
                     // Allowing multiple exposure changes to occur and be analyzed independently
@@ -150,5 +150,15 @@ namespace TimelapseEditor
             }
             return false;
         }
+
+        public void RemoveChanges() {  }
+        public void ApplyPreset(Preset preset) { throw new NotImplementedException(); }
+        public void AddVignetting(int intensity) 
+        {
+            _vignetteChange = new VignetteChange(_images, 0, _images.Count - 1);
+            _vignetteChange.SetIntensity(intensity);
+            _vignetteChange.SaveChange();
+        }
+
     }
 }

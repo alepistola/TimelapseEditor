@@ -14,7 +14,7 @@ namespace TimelapseEditor
      * For more informations about xmp file and the camera raw (photoshop) crs tag please refer to https://exiftool.org/TagNames/XMP.html#crs
      */
 
-    class XmpFile
+    public class XmpFile
     {
         private string _filePath, _imageFileName;
         private StreamReader _sr;
@@ -162,9 +162,15 @@ namespace TimelapseEditor
             var subIfdDirectory = directories.OfType<ExifSubIfdDirectory>().Where(s => s.ContainsTag(ExifDirectoryBase.TagFNumber)).FirstOrDefault();
             _exif["Iso"] = int.Parse(subIfdDirectory?.GetDescription(ExifDirectoryBase.TagIsoEquivalent));
             string expression = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagExposureTime).Split(' ')[0];
-            double num = Double.Parse(expression.Split('/')[0]);
-            double den = Double.Parse(expression.Split('/')[1]);
-            _exif["ExposureTime"] = (num / den);
+            if (expression.Contains('/'))
+            {
+                double num = Double.Parse(expression.Split('/')[0]);
+                double den = Double.Parse(expression.Split('/')[1]);
+                _exif["ExposureTime"] = (num / den);
+            }
+            else
+                _exif["ExposureTime"] = Double.Parse(expression);
+
             _exif["F-number"] = double.Parse(subIfdDirectory?.GetDescription(ExifDirectoryBase.TagFNumber).Substring(2));
         }
     }

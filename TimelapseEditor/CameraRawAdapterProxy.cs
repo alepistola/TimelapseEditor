@@ -5,9 +5,9 @@ using System.Text;
 
 namespace TimelapseEditor
 {
-    class CameraRawAdapterProxy : IAdapterProxy
+    public class CameraRawAdapterProxy : IAdapterProxy
     {
-        private CameraRawXmpAdapter _adapter;
+        private IAdapterProxy _adapter;
         private double _exposure;
         private Dictionary<string, double> _exif;
         private readonly string _photoPath;
@@ -21,17 +21,13 @@ namespace TimelapseEditor
             _imageFileName = null;
         }
 
-        private CameraRawXmpAdapter GetAdapter() // da cambiare in iphotocanges quando avrai ristrutturato la gerarchia
+        private IAdapterProxy GetAdapter()
         {
             if (_adapter == null)
                 _adapter = new CameraRawXmpAdapter(_photoPath);
             return _adapter;
         }
 
-        public void ApplyPreset()
-        {
-            throw new NotImplementedException();
-        }
 
         public double GetExposure()
         {
@@ -49,10 +45,10 @@ namespace TimelapseEditor
         {
             // if adapter exists and exposure is set
             if (!(_adapter == null) && !(Double.IsNaN(_exposure)))
-                _adapter.SetExposureToFile(_exposure);
+                _adapter.SetExposure(_exposure);
             // if exposure is set but adapter is not yet instantiated
             else if (_adapter == null && !(Double.IsNaN(_exposure)))
-                GetAdapter().SetExposureToFile(_exposure);
+                GetAdapter().SetExposure(_exposure);
             // if exposure is not set
             else
                 throw new InvalidOperationException("Exposure value not set hence the adapter is not yet instantiated");
@@ -70,8 +66,21 @@ namespace TimelapseEditor
         public Dictionary<string, double> GetExif()
         {
             if (_exif == null)
-                _exif = GetAdapter().GetExifFromPhoto();
+                _exif = GetAdapter().GetExif();
             return _exif;
+        }
+
+        public void ApplyPreset(Preset preset)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ApplyVignette(int intensity)
+        {
+            if (_adapter == null)
+                GetAdapter().ApplyVignette(intensity);
+            else
+                _adapter.ApplyVignette(intensity);
         }
     }
 }

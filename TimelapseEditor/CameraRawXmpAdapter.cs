@@ -6,22 +6,36 @@ using System.Text;
 
 namespace TimelapseEditor
 {
-    class CameraRawXmpAdapter : IPhotoChanges, IAdapterProxy
+    public class CameraRawXmpAdapter : IPhotoChanges, IAdapterProxy
     {
 
         private XmpFile _xmpFile;
         private readonly string _photoFilename;
         private Dictionary<string, string> _translationRules = new Dictionary<string, string> { { "Exposure", "crs:Exposure2012" } };
+        private Dictionary<string, string> _vignetteRules = new Dictionary<string, string> { { "crs:PostCropVignetteHighlightContrast", "0" },
+                                                                                             { "crs:PostCropVignetteStyle", "1" },
+                                                                                             { "crs:PostCropVignetteRoundness", "+4" },
+                                                                                             { "crs:PostCropVignetteFeather", "100" },
+                                                                                             { "crs:PostCropVignetteMidpoint", "38" }        };
 
         public CameraRawXmpAdapter(string photoFilename)
         {
-            _xmpFile = new XmpFile(photoFilename);
-            _photoFilename = photoFilename;
+            try
+            {
+                _xmpFile = new XmpFile(photoFilename);
+                _photoFilename = photoFilename;
+            }
+            catch(FileNotFoundException e)
+            { Console.WriteLine(e.Message); }
         }
 
-        public void ApplyPresetToFile(Preset preset)
+        #region adapter interface (IPhotoChanges)
+
+        public void SetExposureToFile(double value)
         {
-            throw new NotImplementedException();
+            string stringValue = string.Format("{0:N2}", value);
+            string toWrite = (value >= 0) ? "+" + stringValue.Replace(',', '.') : stringValue.Replace(',', '.');
+            _xmpFile.SaveTag(_translationRules["Exposure"], toWrite);
         }
 
         public double? GetExposureFromFile()
@@ -30,7 +44,7 @@ namespace TimelapseEditor
             try
             {
                 string read = _xmpFile.ReadTag(_translationRules["Exposure"]);
-                if(!string.IsNullOrEmpty(read))
+                if (!string.IsNullOrEmpty(read))
                 {
                     string sub = read.Substring(1).Split("\"")[0];
                     if (sub.StartsWith("+"))
@@ -43,25 +57,68 @@ namespace TimelapseEditor
                 }
             }
             catch (Exception e)
-            { 
-                Console.WriteLine(e.Message); 
+            {
+                Console.WriteLine(e.Message);
             }
 
             return value;
         }
 
-        public void SetExposureToFile(double value)
+        public void ApplyPresetToFile(Preset preset)
         {
-            string stringValue = string.Format("{0:N2}", value);
-            string toWrite = (value >= 0) ? "+" + stringValue.Replace(',', '.') : stringValue.Replace(',', '.');
-            _xmpFile.SaveTag(_translationRules["Exposure"], toWrite);
+            throw new NotImplementedException();
         }
-
-        public string GetImagePath() => _photoFilename;
 
         public string GetFilePath() => _xmpFile.GetPath();
 
-        public string GetImageFileName() => _xmpFile.GetImageFileName();
+        public Dictionary<string, double> GetExifFromPhoto()
+        {
+            return _xmpFile.ReadExifFromPhoto();
+        }
+
+        public void ApplyVignetteToFile(int intensity)
+        {
+            switch (intensity)
+            {
+                case 1:
+                    {
+                        _vignetteRules.Add("crs:PostCropVignetteAmount", "-10");
+                        break;
+                    }
+                case 2:
+                    {
+                        _vignetteRules.Add("crs:PostCropVignetteAmount", "-20");
+                        break;
+
+                    }
+                case 3:
+                    {
+                        _vignetteRules.Add("crs:PostCropVignetteAmount", "-25");
+                        break;
+                    }
+                case 4:
+                    {
+                        _vignetteRules.Add("crs:PostCropVignetteAmount", "-30");
+                        break;
+                    }
+                case 5:
+                    {
+                        _vignetteRules.Add("crs:PostCropVignetteAmount", "-40");
+                        break;
+                    }
+            }
+            foreach(KeyValuePair<string, string> k in _vignetteRules)
+            {
+                _xmpFile.SaveTag(k.Key, k.Value);
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region proxy interface (IAdapterProxy)
 
         public void SetExposure(double value)
         {
@@ -74,14 +131,15 @@ namespace TimelapseEditor
             return Double.IsNaN(exp.Value) ? 0.00 : exp.Value;
         }
 
-        public void ApplyPreset()
+        // It will not be invoked, never, because of the implementation of proxy
+        public void SaveExposure()
         {
-            throw new NotImplementedException();
+
         }
 
-        public Dictionary<string, double> GetExifFromPhoto()
+        public void ApplyPreset(Preset preset)
         {
-            return _xmpFile.ReadExifFromPhoto();
+            ApplyPresetToFile(preset);
         }
 
         public Dictionary<string, double> GetExif()
@@ -89,9 +147,22 @@ namespace TimelapseEditor
             return GetExifFromPhoto();
         }
 
-        public void SaveExposure()
+        public void ApplyVignette(int intensity)
         {
-
+            ApplyVignetteToFile(intensity);
         }
+
+        #endregion
+
+
+
+
+        #region shared methods between IPhotoCanges and IAdapterProxy
+
+        public string GetImagePath() => _photoFilename;
+
+        public string GetImageFileName() => _xmpFile.GetImageFileName();
+
+        #endregion
     }
 }

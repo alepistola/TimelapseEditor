@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TimelapseEditor
 {
-    class Preset
+    public class Preset
     {
         public string Name { get; set; }
         private Dictionary<string, string> _rules;

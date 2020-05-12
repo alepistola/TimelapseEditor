@@ -13,5 +13,6 @@ namespace TimelapseEditor
         public string GetFilePath();
         public string GetImageFileName();
         public Dictionary<string, double> GetExifFromPhoto();
+        public void ApplyVignetteToFile(int intensity);
     }
 }

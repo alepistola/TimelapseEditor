@@ -27,7 +27,8 @@ namespace TimelapseEditor
                     Director director = new Director();
                     director.SetBuilder(timelapseBuilder);
                     director.BuildStabilizedWithVignetteTimelapse(intensity);
-                    Console.WriteLine("[+] Operation terminated correctly!");
+                    Console.WriteLine("[+] Operation terminated correctly!\n\nPress any key to exit");
+                    Console.ReadLine();
                 }
                 else
                 {
@@ -42,7 +43,8 @@ namespace TimelapseEditor
                 Director director = new Director();
                 director.SetBuilder(timelapseBuilder);
                 director.BuildStabilizedTimelapse();
-                Console.WriteLine("[+] Operation terminated correctly!");
+                Console.WriteLine("[+] Operation terminated correctly!\n\nPress any key to exit");
+                Console.ReadLine();
             }
             else
             {

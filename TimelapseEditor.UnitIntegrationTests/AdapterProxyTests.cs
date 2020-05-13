@@ -7,9 +7,9 @@ using System.Text;
 namespace TimelapseEditor.UnitIntegrationTests
 {
     [TestClass]
-    public class CameraRawAdapterProxyTests
+    public class AdapterProxyTests
     {
-        private CameraRawAdapterProxy proxy;
+        private AdapterProxy proxy;
 
         private void Setup()
         {
@@ -19,7 +19,7 @@ namespace TimelapseEditor.UnitIntegrationTests
             {
                 File.Delete("C:\\Users\\Alessandro\\Pictures\\viaggio Erasmus -5 - D\\DSC_0004.xmp");
             }
-            proxy = new CameraRawAdapterProxy(firstImagePath);
+            proxy = new AdapterProxy(firstImagePath);
         }
 
         [TestMethod]

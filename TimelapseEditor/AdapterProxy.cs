@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TimelapseEditor
 {
-    public class CameraRawAdapterProxy : IAdapterProxy
+    public class AdapterProxy : IAdapterProxy
     {
         private IAdapterProxy _adapter;
         private double _exposure;
@@ -13,7 +13,7 @@ namespace TimelapseEditor
         private readonly string _photoPath;
         private string _imageFileName;
 
-        public CameraRawAdapterProxy(string photoPath)
+        public AdapterProxy(string photoPath)
         {
             _photoPath = photoPath;
             _exposure = Double.NaN;

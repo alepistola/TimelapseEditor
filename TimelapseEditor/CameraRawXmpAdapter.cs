@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TimelapseEditor
 {
-    public class CameraRawXmpAdapter : IPhotoChanges, IAdapterProxy
+    public class CameraRawXmpAdapter : IAdapter, IAdapterProxy
     {
 
         private XmpFile _xmpFile;
@@ -29,7 +29,7 @@ namespace TimelapseEditor
             { Console.WriteLine(e.Message); }
         }
 
-        #region adapter interface (IPhotoChanges)
+        #region adapter interface (IAdapter)
 
         public void SetExposureToFile(double value)
         {

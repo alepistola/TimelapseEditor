@@ -33,7 +33,7 @@ namespace TimelapseEditor
             List<IAdapterProxy> imgs = new List<IAdapterProxy>();
             while (File.Exists(photoPath))
             {
-                IAdapterProxy adapterProxy = new CameraRawAdapterProxy(photoPath);
+                IAdapterProxy adapterProxy = new AdapterProxy(photoPath);
                 Console.WriteLine($"[+] Found: {adapterProxy.GetImagePath()}");
                 imgs.Add(adapterProxy);
                 photoPath = GetNextImagePath(photoPath);

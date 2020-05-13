@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TimelapseEditor
 {
-    interface IPhotoChanges
+    interface IAdapter
     {
         public void SetExposureToFile(double value);
         public double? GetExposureFromFile();

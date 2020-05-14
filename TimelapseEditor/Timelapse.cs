@@ -151,7 +151,11 @@ namespace TimelapseEditor
             return false;
         }
 
-        public void RemoveChanges() {  }
+        public void RemoveChanges() 
+        {
+            _exposureChanges = new List<ExposureChange>();
+            _vignetteChange = null;
+        }
         public void ApplyPreset(Preset preset) { throw new NotImplementedException(); }
         public void AddVignetting(int intensity) 
         {

@@ -43,15 +43,11 @@ namespace TimelapseEditor
 
         public void SaveExposure()
         {
-            // if adapter exists and exposure is set
-            if (!(_adapter == null) && !(Double.IsNaN(_exposure)))
-                _adapter.SetExposure(_exposure);
-            // if exposure is set but adapter is not yet instantiated
-            else if (_adapter == null && !(Double.IsNaN(_exposure)))
+            // if exposure is set
+            if (!Double.IsNaN(_exposure))
                 GetAdapter().SetExposure(_exposure);
-            // if exposure is not set
             else
-                throw new InvalidOperationException("Exposure value not set hence the adapter is not yet instantiated");
+                throw new InvalidOperationException("Exposure value not set hence it is impossible to save it");
         }
 
         public string GetImagePath() => _photoPath;

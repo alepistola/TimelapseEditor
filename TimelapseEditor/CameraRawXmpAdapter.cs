@@ -157,7 +157,7 @@ namespace TimelapseEditor
 
 
 
-        #region shared methods between IPhotoCanges and IAdapterProxy
+        #region shared methods between IAdapter and IAdapterProxy
 
         public string GetImagePath() => _photoFilename;
 

@@ -10,7 +10,7 @@ namespace TimelapseEditor
 {
     /* 
      * This class is responsable for the reading and writing directly to and from the file
-     * Any form of caching is provided at this level
+     * No form of caching is provided at this level
      * For more informations about xmp file and the camera raw (photoshop) crs tag please refer to https://exiftool.org/TagNames/XMP.html#crs
      */
 
@@ -43,7 +43,7 @@ namespace TimelapseEditor
             if (!File.Exists(_filePath))
             {
                 File.Create(_filePath).Close();
-                CreateXmpTemplate(photoPath);
+                CreateXmpTemplate();
             }
         }
 
@@ -102,7 +102,7 @@ namespace TimelapseEditor
                 }
             }
             File.WriteAllLines(_filePath, newlines.ToArray());
-        }
+        }   
 
         // if the tag exists is gonna be removed
         private void RemoveTag(string key)
@@ -127,7 +127,7 @@ namespace TimelapseEditor
                 throw new ArgumentNullException($"[-] File: {_filePath} the specified key: {key} is not valid");
         }
 
-        private void CreateXmpTemplate(string photoPath)
+        private void CreateXmpTemplate()
         {
             string[] lines = new string[]
             {

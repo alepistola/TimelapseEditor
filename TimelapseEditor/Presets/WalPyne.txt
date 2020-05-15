@@ -1,0 +1,174 @@
+﻿crs:Version="10.0"
+crs:ProcessVersion="10.0"
+crs:Saturation="-38"
+crs:Sharpness="25"
+crs:LuminanceSmoothing="0"
+crs:ColorNoiseReduction="25"
+crs:Vibrance="+15"
+crs:HueAdjustmentRed="+32"
+crs:HueAdjustmentOrange="+8"
+crs:HueAdjustmentYellow="-49"
+crs:HueAdjustmentGreen="0"
+crs:HueAdjustmentAqua="+10"
+crs:HueAdjustmentBlue="+10"
+crs:HueAdjustmentPurple="0"
+crs:HueAdjustmentMagenta="+20"
+crs:SaturationAdjustmentRed="-44"
+crs:SaturationAdjustmentOrange="-37"
+crs:SaturationAdjustmentYellow="-15"
+crs:SaturationAdjustmentGreen="-35"
+crs:SaturationAdjustmentAqua="-40"
+crs:SaturationAdjustmentBlue="-15"
+crs:SaturationAdjustmentPurple="-45"
+crs:SaturationAdjustmentMagenta="-35"
+crs:LuminanceAdjustmentRed="-10"
+crs:LuminanceAdjustmentOrange="+79"
+crs:LuminanceAdjustmentYellow="+99"
+crs:LuminanceAdjustmentGreen="+10"
+crs:LuminanceAdjustmentAqua="+10"
+crs:LuminanceAdjustmentBlue="-18"
+crs:LuminanceAdjustmentPurple="+20"
+crs:LuminanceAdjustmentMagenta="+10"
+crs:ParametricShadows="0"
+crs:ParametricDarks="0"
+crs:ParametricLights="0"
+crs:ParametricHighlights="0"
+crs:ParametricShadowSplit="25"
+crs:ParametricMidtoneSplit="50"
+crs:ParametricHighlightSplit="75"
+crs:SharpenRadius="+1.0"
+crs:SharpenDetail="25"
+crs:SharpenEdgeMasking="0"
+crs:PostCropVignetteAmount="-15"
+crs:PostCropVignetteMidpoint="50"
+crs:PostCropVignetteFeather="50"
+crs:PostCropVignetteRoundness="0"
+crs:PostCropVignetteStyle="1"
+crs:PostCropVignetteHighlightContrast="0"
+crs:ColorNoiseReductionDetail="50"
+crs:ColorNoiseReductionSmoothness="50"
+crs:Highlights2012="-5"
+crs:Shadows2012="+68"
+crs:Whites2012="+79"
+crs:Blacks2012="-75"
+crs:DefringePurpleAmount="0"
+crs:DefringePurpleHueLo="30"
+crs:DefringePurpleHueHi="70"
+crs:DefringeGreenAmount="0"
+crs:DefringeGreenHueLo="40"
+crs:DefringeGreenHueHi="60"
+crs:ToneCurveName="Medium Contrast"
+crs:ToneCurveName2012="Custom"
+crs:CameraProfile="Adobe Standard"
+crs:HasSettings="True"
+crs:AlreadyApplied="False">
+<crs:ToneCurve>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>32, 22</rdf:li>
+  <rdf:li>64, 56</rdf:li>
+  <rdf:li>128, 128</rdf:li>
+  <rdf:li>192, 196</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurve>
+<crs:ToneCurveRed>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurveRed>
+<crs:ToneCurveGreen>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurveGreen>
+<crs:ToneCurveBlue>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurveBlue>
+<crs:ToneCurvePV2012>
+ <rdf:Seq>
+  <rdf:li>0, 33</rdf:li>
+  <rdf:li>37, 52</rdf:li>
+  <rdf:li>72, 72</rdf:li>
+  <rdf:li>190, 189</rdf:li>
+  <rdf:li>255, 250</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurvePV2012>
+<crs:ToneCurvePV2012Red>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurvePV2012Red>
+<crs:ToneCurvePV2012Green>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurvePV2012Green>
+<crs:ToneCurvePV2012Blue>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurvePV2012Blue>
+<crs:CircularGradientBasedCorrections>
+ <rdf:Seq>
+  <rdf:li>
+   <rdf:Description
+    crs:What="Correction"
+    crs:CorrectionAmount="1.000000"
+    crs:CorrectionActive="true"
+    crs:LocalExposure="0.000000"
+    crs:LocalSaturation="-0.098900"
+    crs:LocalContrast="0.000000"
+    crs:LocalClarity="0.000000"
+    crs:LocalSharpness="0.000000"
+    crs:LocalBrightness="0.000000"
+    crs:LocalToningHue="0.000000"
+    crs:LocalToningSaturation="0.000000"
+    crs:LocalExposure2012="0.000000"
+    crs:LocalContrast2012="0.153850"
+    crs:LocalHighlights2012="0.197800"
+    crs:LocalShadows2012="-0.153850"
+    crs:LocalWhites2012="0.054950"
+    crs:LocalBlacks2012="-0.098900"
+    crs:LocalClarity2012="0.296700"
+    crs:LocalDehaze="0.153850"
+    crs:LocalLuminanceNoise="0.000000"
+    crs:LocalMoire="0.000000"
+    crs:LocalDefringe="0.000000"
+    crs:LocalTemperature="0.000000"
+    crs:LocalTint="0.000000">
+   <crs:CorrectionMasks>
+    <rdf:Seq>
+     <rdf:li
+      crs:What="Mask/CircularGradient"
+      crs:MaskValue="1.000000"
+      crs:Top="0.121239"
+      crs:Left="0.223984"
+      crs:Bottom="1.192100"
+      crs:Right="0.776039"
+      crs:Angle="0.000000"
+      crs:Midpoint="+50"
+      crs:Roundness="0"
+      crs:Feather="+26"
+      crs:Flipped="false"
+      crs:Version="+2"/>
+    </rdf:Seq>
+   </crs:CorrectionMasks>
+   <crs:CorrectionRangeMask
+    crs:Type="0"
+    crs:ColorAmount="0.500000"
+    crs:LumMin="0.000000"
+    crs:LumMax="1.000000"
+    crs:LumFeather="0.500000"/>
+   </rdf:Description>
+  </rdf:li>
+ </rdf:Seq>
+</crs:CircularGradientBasedCorrections>

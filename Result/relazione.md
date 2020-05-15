@@ -41,8 +41,10 @@ L'algoritmo alla base deve:
  La modellizzazione delle possibili modifiche è stata ottenuta attraverso l'utilizzo del pattern builder. La classe director si occupa di gestire le varie configurazioni evitando combinazioni non permesse come l'aggiunta di un preset e l'aggiunta di una vignettatura.
  
  ## Scelte architetturali
- ### Diagramme delle classi
+ ### Diagramme delle classi 
+ Di seguito il [link](https://github.com/alepistola/TimelapseEditor/tree/master/Result/class-uml.png) all'immagine dello schema non ridimensionata.
  
+ ![uml-diagramClass](https://i.ibb.co/2SrshMK/class-uml.jpg)
  ### Descrizione e motivazione dei design pattern utilizzati
  ## Documentazione sull'utilizzo
  ## Use cases

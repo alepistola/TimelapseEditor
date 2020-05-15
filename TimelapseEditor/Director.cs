@@ -14,10 +14,10 @@ namespace TimelapseEditor
         }
 
         public void BuildStabilizedTimelapse() { _builder.AnalyzeExposureTime(); }
-        public void BuildStabilizedWithPresetTimelapse(Preset preset) 
+        public void BuildStabilizedWithPresetTimelapse(string presetFileName) 
         {
             BuildStabilizedTimelapse();
-            _builder.AddPreset(preset);
+            _builder.AddPreset(presetFileName);
         }
         public void BuildStabilizedWithVignetteTimelapse(int intensity)
         {

@@ -11,7 +11,7 @@ namespace TimelapseEditor
      * to mantain a list of all changes needed to stabylize exposure,
      * WB and all the kind of changes that the user is able to make
      */
-    abstract class Change
+    public abstract class Change
     {
         protected List<IAdapterProxy> _modifiedImages;
         protected int _startImageNum, _lastImageNum;

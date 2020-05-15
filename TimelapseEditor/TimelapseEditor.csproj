@@ -10,4 +10,16 @@
     <PackageReference Include="MetadataExtractor" Version="2.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Presets\FairyGreen.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Presets\MountDramatic.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Presets\WalPyne.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

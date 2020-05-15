@@ -19,6 +19,7 @@ namespace TimelapseEditor
         private string _filePath, _imageFileName;
         private StreamReader _sr;
         private const string _afterKey = "xmp:CreatorTool";
+        private const string _attachPresetAfter = "crs:RawFileName";
         private Dictionary<string, double> _exif;
 
         public XmpFile(string photoPath)
@@ -48,6 +49,7 @@ namespace TimelapseEditor
         }
 
         public string GetPath() => _filePath;
+
         public string GetImageFileName() => _imageFileName;
 
         public Dictionary<string, double> ReadExifFromPhoto() => _exif;
@@ -102,7 +104,30 @@ namespace TimelapseEditor
                 }
             }
             File.WriteAllLines(_filePath, newlines.ToArray());
-        }   
+        }
+
+        // only used by Preset, it is useless to check if a tag already exists
+        // because it modifies new tags (not the exposition)
+        public void SaveTags(string[] tags)
+        {
+            string row, temp;
+            string[] lines = File.ReadAllLines(_filePath);
+            List<string> newlines = new List<string>();
+            foreach (string line in lines)
+            {
+                row = line.Trim();
+                if (row.StartsWith(_attachPresetAfter))
+                {
+                    temp = line.Remove(line.Length - 1);
+                    newlines.Add(temp);
+                    newlines.AddRange(tags.Select(tag => "   " + tag));
+                }
+                else
+                    newlines.Add(line);
+
+            }
+            File.WriteAllLines(_filePath, newlines.ToArray());
+        }
 
         // if the tag exists is gonna be removed
         private void RemoveTag(string key)
@@ -149,7 +174,6 @@ namespace TimelapseEditor
                 " </rdf:RDF>",
                 "</x:xmpmeta>"
             };
-
             File.WriteAllLines(_filePath, lines);
         }
 

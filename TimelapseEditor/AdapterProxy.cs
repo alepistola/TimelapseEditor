@@ -66,9 +66,12 @@ namespace TimelapseEditor
             return _exif;
         }
 
-        public void ApplyPreset(Preset preset)
+        public void ApplyPreset(PresetChange preset)
         {
-            throw new NotImplementedException();
+            if (_adapter == null)
+                GetAdapter().ApplyPreset(preset);
+            else
+                _adapter.ApplyPreset(preset);
         }
 
         public void ApplyVignette(int intensity)

@@ -4,11 +4,11 @@ using System.Text;
 
 namespace TimelapseEditor
 {
-    interface IAdapter
+    public interface IAdapter
     {
         public void SetExposureToFile(double value);
         public double? GetExposureFromFile();
-        public void ApplyPresetToFile(Preset preset);
+        public void ApplyPresetToFile(PresetChange preset);
         public string GetImagePath();
         public string GetFilePath();
         public string GetImageFileName();

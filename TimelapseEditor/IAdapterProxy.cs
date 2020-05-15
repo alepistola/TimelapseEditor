@@ -4,12 +4,12 @@ using System.Text;
 
 namespace TimelapseEditor
 {
-    interface IAdapterProxy
+    public interface IAdapterProxy
     {
         public void SetExposure(double value);
         public double GetExposure();
         public void SaveExposure();
-        public void ApplyPreset(Preset preset);
+        public void ApplyPreset(PresetChange preset);
         public string GetImagePath();
         public string GetImageFileName();
         public Dictionary<string, double> GetExif();

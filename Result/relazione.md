@@ -44,7 +44,7 @@ L'algoritmo alla base deve:
  ### Diagramme delle classi 
  Di seguito il [link](https://github.com/alepistola/TimelapseEditor/tree/master/Result/class-uml.png) all'immagine dello schema non ridimensionata.
  
- ![uml-diagramClass](https://i.ibb.co/2SrshMK/class-uml.jpg)
+ ![uml-diagramClass](https://github.com/alepistola/TimelapseEditor/tree/master/Result/duml.jpg)
  ### Descrizione e motivazione dei design pattern utilizzati
  ## Documentazione sull'utilizzo
  ## Use cases

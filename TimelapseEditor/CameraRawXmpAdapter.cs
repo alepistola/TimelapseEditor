@@ -64,9 +64,9 @@ namespace TimelapseEditor
             return value;
         }
 
-        public void ApplyPresetToFile(Preset preset)
+        public void ApplyPresetToFile(PresetChange preset)
         {
-            throw new NotImplementedException();
+            _xmpFile.SaveTags(tags: preset.GetTags());
         }
 
         public string GetFilePath() => _xmpFile.GetPath();
@@ -137,7 +137,7 @@ namespace TimelapseEditor
 
         }
 
-        public void ApplyPreset(Preset preset)
+        public void ApplyPreset(PresetChange preset)
         {
             ApplyPresetToFile(preset);
         }

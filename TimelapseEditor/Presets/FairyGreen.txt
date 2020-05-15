@@ -1,0 +1,139 @@
+crs:Version="10.0"
+crs:ProcessVersion="10.0"
+crs:Saturation="-38"
+crs:Sharpness="47"
+crs:LuminanceSmoothing="20"
+crs:ColorNoiseReduction="25"
+crs:VignetteAmount="0"
+crs:ShadowTint="0"
+crs:RedHue="0"
+crs:RedSaturation="0"
+crs:GreenHue="0"
+crs:GreenSaturation="0"
+crs:BlueHue="0"
+crs:BlueSaturation="0"
+crs:Vibrance="+15"
+crs:HueAdjustmentRed="+32"
+crs:HueAdjustmentOrange="+8"
+crs:HueAdjustmentYellow="-49"
+crs:HueAdjustmentGreen="0"
+crs:HueAdjustmentAqua="+10"
+crs:HueAdjustmentBlue="+10"
+crs:HueAdjustmentPurple="0"
+crs:HueAdjustmentMagenta="+20"
+crs:SaturationAdjustmentRed="-44"
+crs:SaturationAdjustmentOrange="-37"
+crs:SaturationAdjustmentYellow="-15"
+crs:SaturationAdjustmentGreen="-35"
+crs:SaturationAdjustmentAqua="-40"
+crs:SaturationAdjustmentBlue="-15"
+crs:SaturationAdjustmentPurple="-45"
+crs:SaturationAdjustmentMagenta="-35"
+crs:LuminanceAdjustmentRed="-10"
+crs:LuminanceAdjustmentOrange="+79"
+crs:LuminanceAdjustmentYellow="+99"
+crs:LuminanceAdjustmentGreen="+10"
+crs:LuminanceAdjustmentAqua="+10"
+crs:LuminanceAdjustmentBlue="-18"
+crs:LuminanceAdjustmentPurple="+20"
+crs:LuminanceAdjustmentMagenta="+10"
+crs:SplitToningShadowHue="96"
+crs:SplitToningShadowSaturation="8"
+crs:SplitToningHighlightHue="57"
+crs:SplitToningHighlightSaturation="13"
+crs:SplitToningBalance="+54"
+crs:ParametricShadows="0"
+crs:ParametricDarks="0"
+crs:ParametricLights="0"
+crs:ParametricHighlights="0"
+crs:ParametricShadowSplit="25"
+crs:ParametricMidtoneSplit="50"
+crs:ParametricHighlightSplit="75"
+crs:SharpenRadius="+1.5"
+crs:SharpenDetail="54"
+crs:SharpenEdgeMasking="41"
+crs:PostCropVignetteAmount="-23"
+crs:PostCropVignetteMidpoint="52"
+crs:PostCropVignetteFeather="100"
+crs:PostCropVignetteRoundness="+38"
+crs:PostCropVignetteStyle="1"
+crs:PostCropVignetteHighlightContrast="100"
+crs:GrainAmount="0"
+crs:LuminanceNoiseReductionDetail="50"
+crs:ColorNoiseReductionDetail="50"
+crs:LuminanceNoiseReductionContrast="0"
+crs:ColorNoiseReductionSmoothness="50"
+crs:Contrast2012="+5"
+crs:Highlights2012="-5"
+crs:Shadows2012="+50"
+crs:Whites2012="+50"
+crs:Blacks2012="-50"
+crs:Clarity2012="-30"
+crs:DefringePurpleAmount="0"
+crs:DefringePurpleHueLo="30"
+crs:DefringePurpleHueHi="70"
+crs:DefringeGreenAmount="0"
+crs:DefringeGreenHueLo="40"
+crs:DefringeGreenHueHi="60"
+crs:Dehaze="+5"
+crs:ConvertToGrayscale="False"
+crs:ToneCurveName="Medium Contrast"
+crs:ToneCurveName2012="Custom"
+crs:CameraProfile="Adobe Standard"
+crs:HasSettings="True"
+crs:AlreadyApplied="False">
+<crs:ToneCurve>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>32, 22</rdf:li>
+  <rdf:li>64, 56</rdf:li>
+  <rdf:li>128, 128</rdf:li>
+  <rdf:li>192, 196</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurve>
+<crs:ToneCurveRed>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurveRed>
+<crs:ToneCurveGreen>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurveGreen>
+<crs:ToneCurveBlue>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurveBlue>
+<crs:ToneCurvePV2012>
+ <rdf:Seq>
+  <rdf:li>0, 33</rdf:li>
+  <rdf:li>37, 52</rdf:li>
+  <rdf:li>72, 72</rdf:li>
+  <rdf:li>190, 189</rdf:li>
+  <rdf:li>255, 250</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurvePV2012>
+<crs:ToneCurvePV2012Red>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurvePV2012Red>
+<crs:ToneCurvePV2012Green>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurvePV2012Green>
+<crs:ToneCurvePV2012Blue>
+ <rdf:Seq>
+  <rdf:li>0, 0</rdf:li>
+  <rdf:li>255, 255</rdf:li>
+ </rdf:Seq>
+</crs:ToneCurvePV2012Blue>

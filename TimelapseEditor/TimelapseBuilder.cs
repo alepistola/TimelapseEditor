@@ -20,7 +20,7 @@ namespace TimelapseEditor
         }
 
         public void AnalyzeExposureTime() { _timelapse.AnalyzeExposure(); }
-        public void AddPreset(Preset preset) { _timelapse.ApplyPreset(preset); }
+        public void AddPreset(string presetFileName) { _timelapse.ApplyPreset(presetFileName); }
         public void AddVignetting(int intensity) { _timelapse.AddVignetting(intensity); }
         public Timelapse GetTimelapse() => _timelapse;
     }

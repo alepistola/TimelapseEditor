@@ -7,7 +7,7 @@ namespace TimelapseEditor
     public interface ITimelapseBuilder
     {
         void AnalyzeExposureTime();
-        void AddPreset(Preset preset);
+        void AddPreset(string presetFileName);
         void AddVignetting(int intensity);
         Timelapse GetTimelapse();
     }

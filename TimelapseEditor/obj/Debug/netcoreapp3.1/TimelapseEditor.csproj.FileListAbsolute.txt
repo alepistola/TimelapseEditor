@@ -14,3 +14,6 @@ C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\obj\Debug\netco
 C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\MetadataExtractor.dll
 C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\XmpCore.dll
 C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\obj\Debug\netcoreapp3.1\TimelapseEditor.csproj.CopyComplete
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\Presets\FairyGreen.txt
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\Presets\WalPyne.txt
+C:\Users\Alessandro\source\repos\TimelapseEditor\TimelapseEditor\bin\Debug\netcoreapp3.1\Presets\MountDramatic.txt

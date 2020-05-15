@@ -12,6 +12,7 @@ namespace TimelapseEditor
         private List<IAdapterProxy> _images;
         private List<ExposureChange> _exposureChanges;
         private VignetteChange _vignetteChange;
+        private PresetChange _presetChange;
 
         private Timelapse(string photoPath)
         {
@@ -155,8 +156,21 @@ namespace TimelapseEditor
         {
             _exposureChanges = new List<ExposureChange>();
             _vignetteChange = null;
+            _presetChange = null;
         }
-        public void ApplyPreset(Preset preset) { throw new NotImplementedException(); }
+        public void ApplyPreset(string presetFileName) 
+        {
+            try
+            {
+                _presetChange = new PresetChange(_images, 0, _images.Count - 1, presetFileName);
+                _presetChange.SaveChange();
+                Console.WriteLine("[!] Correctly applied the preset to all the images");
+            }
+            catch(FileNotFoundException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         public void AddVignetting(int intensity) 
         {
             _vignetteChange = new VignetteChange(_images, 0, _images.Count - 1);

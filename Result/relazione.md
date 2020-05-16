@@ -5,14 +5,14 @@ Il progetto consiste nella realizzazione di un software C# per la modifica autom
 
 Il software sarà in grado di analizzare le singole immagini RAW (tempo di scatto, diaframma e ISO), che compongono il timelapse, dai file contenenti i metadati (*.xmp) e automaticamente calcolare la giusta esposizione al fine di rendere fluide le transizioni di luce nel timelapse.
 
-Il programma offre inoltre la possibilità di aggiungere una vignettatura al timelapse specificando l'intensità di quest'ultima (1-5) e poter applicare uno dei 3 preset di default. Una volta calcolati i giusti valori di esposizione ed apportate le modifiche richieste il programma salverà tali valori nei file contenenti i metadati.
+Il programma offre inoltre la possibilità di aggiungere una vignettatura al timelapse specificando l'intensità di quest'ultima (1-5) e poter applicare uno dei 3 preset di default. Una volta calcolati i giusti valori di esposizione ed apportate le modifiche richieste, il programma salverà tali valori nei file contenenti i metadati.
 
 ## Studio del problema
 L'algoritmo alla base deve:
 - Estrarre i dati Exif (tempo di scatto, diaframma e valore ISO) dalla foto.
 - Analizzare i valori dell'esposizione:
   - Ogni immagine della sequenza viene confrontata con la successiva.
-  - Per ogni dato exif, se è diverso dal corrispettivo della successiva, vengono calcolati gli stop di differenza e sommati insieme. Il valore di incremento viene calcolato unitariamente (tot. stop di differenza / numero delle immagini coinvolte nella modifica).
+  - Per ogni dato exif, se questo è diverso dal corrispettivo della foto successiva, vengono calcolati gli stop di differenza e sommati insieme. Il valore di incremento viene calcolato unitariamente (tot. stop di differenza / numero delle immagini coinvolte nella modifica).
   - Ogni modifica comprende tutte le immagini dall'immagine attuale all'ultima immagine modificata.
   - Il valore di incremento di esposizione di ogni immagine è quindi *nuovo_valore = val_iniziale + (incremento * (pos_attuale - pos_iniziale))* dove (pos_attuale - pos_iniziale) rappresenta la posizione relativa della foto nella lista delle foto coinvolte nella modifica.
   - Salvataggio dei nuovi valori.
@@ -20,10 +20,10 @@ L'algoritmo alla base deve:
  
  In fase di progettazione si è voluto costruire una struttura fortemente indipendente dal tipo di tag specifici (utilizzati da vendor come Photoshop) quindi, anche se la struttura implementata attualmente prevede solamente l'apporto di modifiche compatibili con gli standard xmp di Camera Raw, i design patterns utilizzati e l'architettura progettuale sono fortemente aperte all'aggiunta di altri Adapter (componenti che standardizzano l'accesso al file xmp) che consentono di operare su tag diversi, basta specifica delle regole di traduzione appunto nell'adapter (Informazioni più dettagliate riguardo alla contribuzione sono presenti nel [readme](https://github.com/alepistola/TimelapseEditor/) del progetto).
  
- Partendo dal basso, i **punti critici** sono: 
+ Partendo dal basso, i **punti critici** rilevati durante la fase di progettazione sono: 
  - l'accesso al file e la lettura di dati exif; 
  - la crezione di un'interfaccia comune per standardizzare i valori da modificare nel file xmp;
- - la modellizzazione delle possibili modifiche apportabili ai file;
+ - la modellizzazione delle possibili modifiche da apportare ai file;
  - la creazione di un sistema che permette di comporre e combinare i 3 tipi di modifiche disponibili, in modo sicuro, generando il Timelapse.
  
  **Soluzioni adottate**
@@ -37,7 +37,8 @@ L'algoritmo alla base deve:
  - numero dell'immagine da cui la modifica inizia;
  - numero dell'ultima immagine a cui le modifiche vanno applicate;
  - metodo di salvataggio sulle singole immagini;
- Tale classe è la classe Change da cui derivano le classi: ExposureChange, VignetteChange e PresetChange utilizzate dall'oggetto Timelapse.
+ 
+ Tale classe è la classe Change, da cui derivano le classi: ExposureChange, VignetteChange e PresetChange utilizzate dall'oggetto Timelapse.
  
  La modellizzazione delle possibili modifiche è stata ottenuta attraverso l'utilizzo del pattern builder. La classe director si occupa di gestire le varie configurazioni evitando combinazioni non permesse come l'aggiunta di un preset e l'aggiunta di una vignettatura.
  
@@ -45,7 +46,7 @@ L'algoritmo alla base deve:
  ### Diagramme delle classi
  Di seguito il [link](https://github.com/alepistola/TimelapseEditor/tree/master/Result/class-uml.png) all'immagine dello schema non ridimensionata.
  
- ![uml-diagramClass](https://github.com/alepistola/TimelapseEditor/tree/master/Result/class-uml-resized.png)
+ ![uml-diagramClass](https://raw.githubusercontent.com/alepistola/TimelapseEditor/master/Result/class-uml.png)
  ### Descrizione e motivazione dei design pattern utilizzati
  Sono stati utilizzati i seguenti design pattern:
  - **Adapter pattern**: converte l'interfaccia della classe XmpFile, utilizzata per leggere e scrivere coppie di chiavi-valori nel file fisico xmp e per leggere i dati exif dalla foto, in un'interfaccia standard che, per determinati valori, come l'esposizione, effettua il "parsing" in lettura e l'"encoding" in scrittura così che il client possa rimanere all'oscuro dell'implementazione fisica. Essendo i metodi di scrittura e lettura sul file, implementati nella classa XmpFile, indipendenti dagli specifici tag xmp che si vogliono scrivere, l'adapter pattern è stato utilizzato per riutilizzare la classe XmpFile con diversi oggetti (che dovranno implementare l'interfaccia IAdapter).
@@ -63,3 +64,31 @@ L'algoritmo alla base deve:
 - Se l'esecuzione è andata a buon fine sarà stato creato un file con estensione 'xmp' per ogni foto che il software ha analizzato
 - Aprire Photoshop Lightroom o After Effects. Nel caso abbiate scelto di utilizzare Lightroom, sarà sufficiente importare le foto, selezionarle tutte, premere il tasto destro e selezionare "metadati -> leggi metadati da file" a questo punto, le foto modificate possono essere esportate senza alcuna restrizione. Nel caso si scelga di importarle direttamente in After Effects, le immagini importate come sequenza saranno automaticamente linkate al loro file contenente i metadati e l'eventuale composizione generata dalle foto apparirà già modificata.
  ## Use cases
+ ![use cases](https://raw.githubusercontent.com/alepistola/TimelapseEditor/master/Result/usecase.png)
+| **Use case:** Stabilizzare esposizione |
+| ------------- |
+| **Id**: US1   |
+| **Actor**: U1 Utente   |
+| **Preconditions**: **-** U1 deve aver salvato le foto in una cartella **-** U1 conosce il path assoluto della prima foto **-** Tutte le foto sono identificate da un nome seguito da una sequenza numerica |
+| **Basic course of events**: **1.** U1 avvia il programma, seleziona le modifiche che vuole apportare **2.** U1 inserisce il path della prima foto ed il programma trova correttamente l'intera sequenza **3.** Il programma analizza le foto e salva le modifiche in un file xmp con lo stesso nome del nome della foto |
+| **Postconditions**: U1 naviga nella cartella contenente la sequenza foto e constata la presenza dei file xmp contenenti le modifiche |
+| **Alternative paths**: **4.** Se 2 fallisce, il programma non trova la prima foto e stampa un messaggio di errore terminando **5.** Se 3 fallisce, il programma termina e mostra l'errore (le modifiche già apportate non vengono eliminate) |
+
+| **Use case:** Stabilizzare esposizione e applicare vignettatura|
+| ------------- |
+| **Id**: US2   |
+| **Actor**: U1 Utente   |
+| **Preconditions**: **-** U1 deve aver salvato le foto in una cartella **-** U1 conosce il path assoluto della prima foto **-** Tutte le foto sono identificate da un nome seguito da una sequenza numerica |
+| **Basic course of events**: **1.** U1 avvia il programma, seleziona le modifiche che vuole apportare **2.** U1 inserisce l'intensità della vignettatura che desidera **3.** U1 inserisce il path della prima foto ed il programma trova correttamente l'intera sequenza **4.** Il programma analizza le foto e salva le modifiche dell'esposizione nel file xmp **5.** Il programma converte correttamente i tag crs da scrivere nel file xmp e salva le modifiche nel file xmp |
+| **Postconditions**: U1 naviga nella cartella contenente la sequenza foto e constata la presenza dei file xmp contenenti le modifiche |
+| **Alternative paths**: **6.** Se 2 fallisce, il programma stampa un messaggio di errore e termina **7.** Se 3 fallisce, il programma non trova la prima foto e stampa un messaggio di errore terminando **8.** Se 4 o 5 falliscono, il programma termina e mostra l'errore (le modifiche già apportate non vengono eliminate) |
+
+| **Use case:** Stabilizzare esposizione e applicare un preset|
+| ------------- |
+| **Id**: US3   |
+| **Actor**: U1 Utente   |
+| **Preconditions**: **-** U1 deve aver salvato le foto in una cartella **-** U1 conosce il path assoluto della prima foto **-** Tutte le foto sono identificate da un nome seguito da una sequenza numerica **-** Il programma viene eseguito nella stessa cartella dove è stava salvata la cartella 'Presets' |
+| **Basic course of events**: **1.** U1 avvia il programma, seleziona le modifiche che vuole apportare **2.** U1 inserisce il numero del preset che desidera applicare **3.** U1 inserisce il path della prima foto ed il programma trova correttamente l'intera sequenza **4.** Il programma analizza le foto e salva le modifiche dell'esposizione nel file xmp **5.** Il programma legge correttamente le stringhe dal file di testo del relativo preset e le riporta nel file xmp |
+| **Postconditions**: U1 naviga nella cartella contenente la sequenza foto e constata la presenza dei file xmp contenenti le modifiche |
+| **Alternative paths**: **6.** Se 2 fallisce, il programma stampa un messaggio di errore specificando il path non trovato e termina **7.** Se 3 fallisce, il programma non trova la prima foto e stampa un messaggio di errore terminando **8.** Se 4 o 5 falliscono, il programma termina e mostra l'errore (le modifiche già apportate non vengono eliminate) |
+

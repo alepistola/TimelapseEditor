@@ -40,12 +40,12 @@ namespace TimelapseEditor
             // read exif
             ReadExif(photoPath);
 
-            // checking if the xmp file already exists otherwise i'll create it
+            // checking if the xmp file already exists otherwise 
             if (!File.Exists(_filePath))
-            {
-                File.Create(_filePath).Close();
-                CreateXmpTemplate();
-            }
+                File.Delete(_filePath);
+
+            File.Create(_filePath).Close();
+            CreateXmpTemplate();
         }
 
         public string GetPath() => _filePath;

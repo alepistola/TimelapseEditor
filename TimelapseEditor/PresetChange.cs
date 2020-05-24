@@ -5,10 +5,19 @@ using System.Text;
 
 namespace TimelapseEditor
 {
+    /* Derived by Change, this class represents changes regardless
+     * the preset values. It override the abstract method
+     * declared in the base class (SaveChange)
+     */
     public class PresetChange : Change
     {
+        // preset file name
         public string FileName { get; set; }
+
+        // list of key-value
         private string[] _rules;
+
+        // hard-coded directory
         private const string _presetDirectory = "Presets\\";
 
 
@@ -25,6 +34,7 @@ namespace TimelapseEditor
             }
         }
 
+        /* read all the lines (key-value pairs) from the txt file */
         private string[] LoadTagsFromPresetFile(string presetFileName)
         {
             Dictionary<string, string> rules = new Dictionary<string, string>();
@@ -41,6 +51,7 @@ namespace TimelapseEditor
         
         public string[] GetTags() => _rules;
 
+        /* it applies the preset to every image in the change object */
         public override void SaveChange()
         {
             for (int i = _startImageNum; i <= _lastImageNum; i++)

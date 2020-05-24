@@ -6,6 +6,10 @@ using System.Text;
 
 namespace TimelapseEditor
 {
+    /*
+     * this class represent the final software product. The Timelapse class is a singleton because the generated timelapse must always be one
+     * The class uses the change classes to modify the images. The algorithm that prevent the exposition ramping is implemented here (AnalyzeExposure)
+     */
     public class Timelapse
     {
         private static Timelapse _instance = null;
@@ -27,7 +31,7 @@ namespace TimelapseEditor
             return _instance;
         }
 
-         
+        /* Responsable for loading all the images using the first photo path */
         private List<IAdapterProxy> LoadImagesFromFirstPhoto(string photoPath)
         {
             int found = 0;
@@ -40,10 +44,13 @@ namespace TimelapseEditor
                 photoPath = GetNextImagePath(photoPath);
                 found++;
             }
-            Console.WriteLine($"[!] Total {found} image to process");
+            Console.WriteLine($"[!] Total {found} images to process");
             return imgs;
         }
 
+        /* It scans the photo path trying to separate the sequence file number of the photo file name from the sequence name
+         * e.g. DSC_0001.NEF -> "DSC_000" + "1" + ".NEF" hence next one is "DSC_000" + "2" + ".NEF" -> DSC_0002.NEF
+         */
         private string GetNextImagePath(string prevImagePath)
         {
             int position = prevImagePath.Split('\\').Length - 1;

@@ -5,6 +5,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="System.Collections" Version="4.3.0" />
     <PackageReference Include="MetadataExtractor" Version="2.4.0" />

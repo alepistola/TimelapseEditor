@@ -4,6 +4,10 @@ using System.Text;
 
 namespace TimelapseEditor
 {
+
+    /* it exposes all the operation that can be made to the timelapse object
+     * it is responsable of the creation and modulation of the timelapse object (singleton)
+     */
     public class TimelapseBuilder : ITimelapseBuilder
     {
         private Timelapse _timelapse;

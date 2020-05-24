@@ -54,6 +54,7 @@ namespace TimelapseEditor
 
         public Dictionary<string, double> ReadExifFromPhoto() => _exif;
 
+        /* it searches for the specified key in the file, if it finds the value then it will be returned */
         public string ReadTag(string key)
         {
             string toRet = null;
@@ -76,6 +77,7 @@ namespace TimelapseEditor
             return toRet;
         }
 
+        /* Firstly check if the value already exists if it is the case it will be removed and then the new key-value pair is added */
         public void SaveTag(string key, string value)
         {
             string row;
@@ -152,6 +154,7 @@ namespace TimelapseEditor
                 throw new ArgumentNullException($"[-] File: {_filePath} the specified key: {key} is not valid");
         }
 
+        /* used to create the xmp file */
         private void CreateXmpTemplate()
         {
             string[] lines = new string[]
@@ -177,6 +180,7 @@ namespace TimelapseEditor
             File.WriteAllLines(_filePath, lines);
         }
 
+        /* it uses the metadata-extractor package to read the required exif data from the image */
         private void ReadExif(string photoPath) 
         {
             _exif = new Dictionary<string, double>() { { "ExposureTime", Double.NaN }, { "Iso", Double.NaN }, { "F-number", Double.NaN } };

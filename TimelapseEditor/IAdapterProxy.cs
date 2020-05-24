@@ -4,6 +4,10 @@ using System.Text;
 
 namespace TimelapseEditor
 {
+    /*
+     * declares all the methods a Proxy should have. In order to make things work also the Adapter object
+     * that is being proxied should implement this interface
+     */
     public interface IAdapterProxy
     {
         public void SetExposure(double value);

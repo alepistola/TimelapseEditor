@@ -8,8 +8,8 @@ namespace TimelapseEditor
      * Change is the main class specialized by others derived class
      * used to store information about general changes
      * It provides the more general interface used by Timelapse
-     * to mantain a list of all changes needed to stabylize exposure,
-     * WB and all the kind of changes that the user is able to make
+     * to mantain a list of all changes needed to stabilize exposure,
+     * apply a vignette and all of kinds of changes that the user is able to make
      */
     public abstract class Change
     {

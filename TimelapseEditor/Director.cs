@@ -4,6 +4,10 @@ using System.Text;
 
 namespace TimelapseEditor
 {
+    /*
+     * the class director exposes the configuration of the product (timelapse)
+     * that is gonna be modified through the builder object
+     */
     public class Director
     {
         private ITimelapseBuilder _builder;

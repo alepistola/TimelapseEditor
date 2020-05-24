@@ -5,8 +5,8 @@ using System.Text;
 namespace TimelapseEditor
 {
     /* Derived by Change, this class represents changes regardless
-     * the exposure time value. It concretizes the abstract method
-     * declared in the base class */
+     * the vignette values. It override the abstract method
+     * declared in the base class (SaveChange) */
     class VignetteChange : Change
     {
         private int _intensity;
@@ -17,12 +17,14 @@ namespace TimelapseEditor
 
         public int GetIntensity() => _intensity;
 
+        /* the intensity should be between 1 and 5 */
         public void SetIntensity(int intensity)
         {
             if (intensity > 0 && intensity <= 5)
                 _intensity = intensity;
         }
 
+        /* it saves the vignette values to every image belonging the change */
         public override void SaveChange()
         {
             for (int i = _startImageNum; i <= _lastImageNum; i++)

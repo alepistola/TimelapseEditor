@@ -6,6 +6,11 @@ using System.Text;
 
 namespace TimelapseEditor
 {
+    /*
+     * this class is responsable for implementing the IAdapter interface to communicate with the xmpfile and the IAdapterProxy in order to be proxied by the AdapterProxy object (tha use the IAdapter interface)
+     * in this class the IAdapterProxy methods are implemented simply by invoking the corresponding IAdapter method
+     * It implements the IAdapter methods for the camera raw tags (translation rules are hard-coded here)
+     */
     public class CameraRawXmpAdapter : IAdapter, IAdapterProxy
     {
 

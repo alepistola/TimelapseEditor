@@ -5,9 +5,15 @@ using System.Text;
 
 namespace TimelapseEditor
 {
+    /* 
+     * this class is the actual proxy for adapters. It provides a form of caching and lazy loading when possible.
+     */
     public class AdapterProxy : IAdapterProxy
     {
+        // internal adapter
         private IAdapterProxy _adapter;
+
+        // internal values (cached)
         private double _exposure;
         private Dictionary<string, double> _exif;
         private readonly string _photoPath;

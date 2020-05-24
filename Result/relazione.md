@@ -5,7 +5,7 @@ Il progetto consiste nella realizzazione di un software C# per la modifica autom
 
 Il software sarà in grado di analizzare le singole immagini RAW (tempo di scatto, diaframma e ISO), che compongono il timelapse, dai file contenenti i metadati (*.xmp) e automaticamente calcolare la giusta esposizione al fine di rendere fluide le transizioni di luce nel timelapse.
 
-Il programma offre inoltre la possibilità di aggiungere una vignettatura al timelapse specificando l'intensità di quest'ultima (1-5) e poter applicare uno dei 3 preset di default. Una volta calcolati i giusti valori di esposizione ed apportate le modifiche richieste, il programma salverà tali valori nei file contenenti i metadati.
+Il programma offre inoltre la possibilità di aggiungere una vignettatura al timelapse specificando l'intensità di quest'ultima (1-5) e poter applicare uno dei 3 preset presenti di default. Una volta calcolati i giusti valori di esposizione ed apportate le modifiche richieste, il programma salverà tali valori nei file contenenti i metadati.
 
 ## Studio del problema
 L'algoritmo alla base deve:
@@ -18,7 +18,7 @@ L'algoritmo alla base deve:
   - Salvataggio dei nuovi valori.
  - Aggiunta e salvataggio di eventuali vignettature o preset (una esclude l'altra poichè solitamente i preset includono una vignettatura).
  
- In fase di progettazione si è voluto costruire una struttura fortemente indipendente dal tipo di tag specifici (utilizzati da vendor come Photoshop) quindi, anche se la struttura implementata attualmente prevede solamente l'apporto di modifiche compatibili con gli standard xmp di Camera Raw, i design patterns utilizzati e l'architettura progettuale sono fortemente aperte all'aggiunta di altri Adapter (componenti che standardizzano l'accesso al file xmp) che consentono di operare su tag diversi, basta specifica delle regole di traduzione appunto nell'adapter (Informazioni più dettagliate riguardo alla contribuzione sono presenti nel [readme](https://github.com/alepistola/TimelapseEditor/) del progetto).
+ In fase di progettazione si è voluto costruire una struttura fortemente indipendente dal tipo di tag specifici (utilizzati da vendor come Photoshop) quindi, anche se la struttura implementata attualmente prevede solamente l'apporto di modifiche compatibili con gli standard xmp di Camera Raw, i design patterns utilizzati e l'architettura progettuale sono fortemente orientate all'aggiunta di altri Adapter (componenti che standardizzano l'accesso al file xmp) che consentono di operare su tag diversi, basta specificare delle regole di traduzione appunto nell'adapter (Informazioni più dettagliate riguardo alla contribuzione sono presenti nel [readme](https://github.com/alepistola/TimelapseEditor/) del progetto).
  
  Partendo dal basso, i **punti critici** rilevati durante la fase di progettazione sono: 
  - l'accesso al file e la lettura di dati exif; 
@@ -40,7 +40,7 @@ L'algoritmo alla base deve:
  
  Tale classe è la classe Change, da cui derivano le classi: ExposureChange, VignetteChange e PresetChange utilizzate dall'oggetto Timelapse.
  
- La modellizzazione delle possibili modifiche è stata ottenuta attraverso l'utilizzo del pattern builder. La classe director si occupa di gestire le varie configurazioni evitando combinazioni non permesse come l'aggiunta di un preset e l'aggiunta di una vignettatura.
+ La modellizzazione delle possibili modifiche è stata ottenuta attraverso l'utilizzo del design pattern *builder*. La classe director si occupa di gestire le varie configurazioni evitando combinazioni non permesse come l'aggiunta di un preset e l'aggiunta di una vignettatura.
  
  ## Scelte architetturali
  ### Diagramme delle classi
